@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ÁLVARO.DEV // Cloud Architect & Tech Lead Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface": "#0b1326","surface-dim": "#0b1326","surface-bright": "#31394d",
+        "surface-container-lowest": "#060e20","surface-container-low": "#131b2e",
+        "surface-container": "#171f33","surface-container-high": "#222a3d",
+        "surface-container-highest": "#2d3449","on-surface": "#dae2fd",
+        "on-surface-variant": "#bcc9cd","outline": "#869397","outline-variant": "#3d494c",
+        "primary": "#4cd7f6","on-primary": "#003640","primary-container": "#06b6d4",
+        "secondary": "#94de2d","on-secondary": "#1f3700","secondary-container": "#7ac100",
+        "tertiary": "#c0c1ff","background": "#0b1326","on-background": "#dae2fd",
+        "surface-variant": "#2d3449","primary-fixed-dim": "#4cd7f6",
+        "error": "#ffb4ab"
+      },
+      fontFamily: {
+        "grotesk": ["Space Grotesk", "sans-serif"],
+        "mono": ["JetBrains Mono", "monospace"],
+        "geist": ["Geist", "sans-serif"]
+      }
+    }
+  }
+}
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Geist', sans-serif; background: #0b1326; color: #dae2fd; overflow-x: hidden; }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #060e20; }
+  ::-webkit-scrollbar-thumb { background: #4cd7f6; border-radius: 2px; }
+
+  /* ── Nav ── */
+  .nav-blur { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+
+  /* ── Cursor blink ── */
+  .cursor-blink { border-right: 2px solid #94de2d; animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { border-color: transparent; } }
+
+  /* ── Glows ── */
+  .glow-cyan { box-shadow: 0 0 24px rgba(76,215,246,0.18); }
+  .glow-lime { box-shadow: 0 0 24px rgba(148,222,45,0.18); }
+  .glow-btn  { box-shadow: 0 0 16px rgba(6,182,212,0.35); }
+
+  /* ── Gradient text ── */
+  .grad-text { background: linear-gradient(135deg, #4cd7f6 0%, #c0c1ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-btn  { background: linear-gradient(135deg, #06b6d4, #9a9dff); }
+
+  /* ── Scanline bg ── */
+  .scanlines { background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(76,215,246,0.015) 2px, rgba(76,215,246,0.015) 4px); }
+
+  /* ── Fade-in animations ── */
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up-d1 { transition-delay: 0.1s; }
+  .fade-up-d2 { transition-delay: 0.2s; }
+  .fade-up-d3 { transition-delay: 0.3s; }
+  .fade-up-d4 { transition-delay: 0.4s; }
+  .fade-up-d5 { transition-delay: 0.5s; }
+
+  /* ── Hero grid decoration ── */
+  .hero-grid { background-image: linear-gradient(rgba(76,215,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(76,215,246,0.04) 1px, transparent 1px); background-size: 40px 40px; }
+
+  /* ── Terminal ── */
+  .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .terminal-line { display: flex; align-items: flex-start; gap: 8px; }
+
+  /* ── Carousel ── */
+  .carousel-track { display: flex; gap: 24px; transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+  .carousel-card { flex: 0 0 calc(33.333% - 16px); min-width: 300px; }
+  @media (max-width: 1024px) { .carousel-card { flex: 0 0 calc(50% - 12px); } }
+  @media (max-width: 640px)  { .carousel-card { flex: 0 0 85%; } }
+
+  /* ── Skill badges ── */
+  .skill-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 2px; border: 1px solid; }
+
+  /* ── Timeline ── */
+  .timeline-line { position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: linear-gradient(to bottom, #4cd7f6, transparent); }
+  .timeline-dot { width: 8px; height: 8px; border-radius: 50%; background: #4cd7f6; border: 2px solid #0b1326; outline: 1px solid #4cd7f6; flex-shrink: 0; margin-top: 4px; }
+
+  /* ── Progress bars ── */
+  .progress-bar { height: 2px; background: #131b2e; border-radius: 1px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #4cd7f6, #c0c1ff); border-radius: 1px; width: 0; transition: width 1.2s ease; }
+
+  /* ── Contact form ── */
+  .form-input { background: #131b2e; border: none; border-bottom: 1px solid #3d494c; color: #dae2fd; font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 12px 0; width: 100%; outline: none; transition: border-color 0.2s; }
+  .form-input:focus { border-color: #4cd7f6; }
+  .form-input::placeholder { color: rgba(188,201,205,0.4); }
+
+  /* ── Mobile nav ── */
+  .mobile-nav { transform: translateX(100%); transition: transform 0.3s ease; }
+  .mobile-nav.open { transform: translateX(0); }
+
+  /* ── Typing animation ── */
+  .typing-text { overflow: hidden; white-space: nowrap; border-right: 2px solid #94de2d; animation: typing 3.5s steps(40,end), blink 0.75s step-end infinite; }
+  @keyframes typing { from { width: 0; } to { width: 100%; } }
+
+  /* ── Demo badge ── */
+  .demo-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; background: rgba(148,222,45,0.12); color: #94de2d; border: 1px solid rgba(148,222,45,0.25); }
+
+  /* ── Divider gradient ── */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, #3d494c 30%, #3d494c 70%, transparent); }
+
+  /* ── Number ticker ── */
+  .stat-number { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 700; line-height: 1; }
+</style>
+</head>
+<body class="bg-background scanlines">
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<header id="nav" class="fixed top-0 w-full z-50 nav-blur bg-surface/50 border-b border-outline-variant transition-all duration-300">
+  <div class="flex justify-between items-center h-16 px-5 md:px-16 max-w-[1200px] mx-auto">
+    <a href="#hero" class="font-grotesk font-bold tracking-tighter text-primary text-lg">ÁLVARO.DEV</a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#projects" class="text-on-surface-variant font-geist text-sm hover:text-primary transition-colors">Proyectos</a>
+      <a href="#about" class="text-on-surface-variant font-geist text-sm hover:text-primary transition-colors">Sobre mí</a>
+      <a href="#stack" class="text-on-surface-variant font-geist text-sm hover:text-primary transition-colors">Stack</a>
+      <a href="#experience" class="text-on-surface-variant font-geist text-sm hover:text-primary transition-colors">Experiencia</a>
+      <a href="#cv" class="text-on-surface-variant font-geist text-sm hover:text-primary transition-colors">CV</a>
+      <a href="#contact" class="text-on-surface-variant font-geist text-sm hover:text-primary transition-colors">Contacto</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a id="resume-btn-desktop" href="#" class="hidden md:inline-flex grad-btn text-on-primary px-5 py-2 font-mono text-xs font-bold rounded-sm glow-btn hover:brightness-110 transition-all">RESUME.PDF</a>
+      <button id="menu-btn" class="md:hidden p-2 text-on-surface-variant" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div id="mobile-nav" class="mobile-nav fixed inset-y-0 right-0 w-72 z-[60] bg-surface-container-low border-l border-outline-variant flex flex-col p-8 gap-6">
+  <button id="close-menu" class="self-end text-on-surface-variant hover:text-primary">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="flex flex-col gap-6 mt-4">
+    <a href="#projects" class="mobile-link font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">// PROYECTOS</a>
+    <a href="#about" class="mobile-link font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">// SOBRE_MÍ</a>
+    <a href="#stack" class="mobile-link font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">// STACK</a>
+    <a href="#experience" class="mobile-link font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">// EXPERIENCIA</a>
+    <a href="#cv" class="mobile-link font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">// CV</a>
+    <a href="#contact" class="mobile-link font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">// CONTACTO</a>
+  </div>
+  <a id="resume-btn-mobile" href="#" class="mt-auto grad-btn text-center text-on-primary py-3 font-mono text-xs font-bold rounded-sm">RESUME.PDF</a>
+</div>
+<div id="overlay" class="hidden fixed inset-0 z-[55] bg-black/60 md:hidden"></div>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section id="hero" class="relative pt-32 pb-20 md:pt-52 md:pb-36 px-5 md:px-16 max-w-[1200px] mx-auto overflow-hidden hero-grid">
+  <!-- Ambient glows -->
+  <div class="absolute top-20 right-0 w-96 h-96 bg-primary/8 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-72 h-72 bg-tertiary/6 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <!-- Left -->
+    <div class="lg:col-span-7 z-10">
+      <div class="inline-flex items-center gap-2 py-1 px-3 mb-6 bg-secondary/10 border border-secondary/20 rounded-sm fade-up">
+        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+        <span class="font-mono text-xs text-secondary tracking-widest">SISTEMA OPERATIVO</span>
+      </div>
+      <h1 class="font-grotesk font-bold text-4xl md:text-5xl lg:text-6xl text-on-surface mb-6 leading-tight fade-up fade-up-d1">
+        Diseñando <span class="grad-text">soluciones</span><br/>cloud a escala empresarial.
+      </h1>
+      <p class="font-geist text-base text-on-surface-variant mb-10 max-w-lg leading-relaxed fade-up fade-up-d2">
+        Tech Lead con 15 años de trayectoria en sistemas de gestión documental con IA, arquitecturas Azure y seguridad cloud.
+        Experto en clasificación inteligente, RAG, Terraform e IaC. Especializado en cumplimiento ISO 27001/ENS,
+        transformación digital y liderazgo ágil. Construyendo soluciones empresariales que escalan.
+      </p>
+      <div class="flex flex-wrap gap-4 fade-up fade-up-d3">
+      <a id="hero-download-btn" href="#" class="grad-btn text-on-primary px-7 py-3.5 font-mono text-xs font-bold rounded-sm flex items-center gap-2 glow-btn hover:brightness-110 transition-all">
+          DESCARGAR_CV
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a href="#contact" class="border border-primary text-primary px-7 py-3.5 font-mono text-xs font-bold rounded-sm hover:bg-primary/8 transition-all">
+          CONTACTAR
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="flex gap-10 mt-14 fade-up fade-up-d4">
+        <div>
+          <div class="stat-number grad-text" data-target="15">0</div>
+          <div class="font-mono text-[10px] text-on-surface-variant mt-1 tracking-widest">AÑOS EXP.</div>
+        </div>
+        <div class="w-px bg-outline-variant"></div>
+        <div>
+          <div class="stat-number grad-text" data-target="50">0</div>
+          <div class="font-mono text-[10px] text-on-surface-variant mt-1 tracking-widest">PROYECTOS</div>
+        </div>
+        <div class="w-px bg-outline-variant"></div>
+        <div>
+          <div class="stat-number grad-text" data-target="25">0</div>
+          <div class="font-mono text-[10px] text-on-surface-variant mt-1 tracking-widest">TECNOLOGÍAS</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terminal -->
+    <div class="lg:col-span-5 relative mt-8 lg:mt-0 fade-up fade-up-d2">
+      <div class="bg-surface-container rounded-lg border border-outline-variant overflow-hidden glow-cyan">
+        <div class="bg-surface-container-high px-4 py-3 flex items-center justify-between border-b border-outline-variant">
+          <div class="flex gap-2">
+            <div class="terminal-dot bg-[#FF5F56]"></div>
+            <div class="terminal-dot bg-[#FFBD2E]"></div>
+            <div class="terminal-dot bg-[#27C93F]"></div>
+          </div>
+          <span class="font-mono text-[11px] text-on-surface-variant">bash — portfolio.sh</span>
+        </div>
+        <div class="p-5 font-mono text-[13px] leading-7 space-y-1" id="terminal-content">
+          <div class="text-primary-fixed-dim">$ <span class="text-on-surface">whoami</span></div>
+          <div class="text-secondary pl-2">→ Álvaro Hernández Gil</div>
+          <div class="text-primary-fixed-dim mt-2">$ <span class="text-on-surface">cat expertise.json</span></div>
+          <div class="text-on-surface-variant pl-2 text-[12px] leading-relaxed">
+            <span class="text-outline">{</span><br/>
+            &nbsp;&nbsp;<span class="text-tertiary">"documental"</span>: [<span class="text-secondary">"RAG"</span>, <span class="text-secondary">"IA Search"</span>, <span class="text-secondary">"SharePoint"</span>],<br/>
+            &nbsp;&nbsp;<span class="text-tertiary">"backend"</span>: [<span class="text-secondary">"C#"</span>, <span class="text-secondary">".NET Core"</span>, <span class="text-secondary">"REST APIs"</span>],<br/>
+            &nbsp;&nbsp;<span class="text-tertiary">"cloud"</span>: [<span class="text-secondary">"Azure"</span>, <span class="text-secondary">"Terraform"</span>, <span class="text-secondary">"ISO 27001"</span>]<br/>
+            <span class="text-outline">}</span>
+          </div>
+          <div class="text-primary-fixed-dim mt-2">$ <span class="cursor-blink"></span></div>
+        </div>
+      </div>
+      <div class="absolute -top-8 -right-8 w-56 h-56 bg-primary/10 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PROJECTS CAROUSEL ═══════════════════════ -->
+<section id="projects" class="py-20 md:py-32 bg-surface-container-lowest">
+  <div class="px-5 md:px-16 max-w-[1200px] mx-auto">
+    <div class="flex justify-between items-end mb-12 fade-up">
+      <div>
+        <span class="font-mono text-xs text-secondary block mb-2 tracking-widest">// SELECTED_WORKS</span>
+        <h2 class="font-grotesk font-semibold text-3xl md:text-4xl text-on-surface">Proyectos Destacados</h2>
+      </div>
+      <div class="hidden md:flex items-center gap-3">
+        <button id="prev-btn" class="w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all" aria-label="Anterior">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="next-btn" class="w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all" aria-label="Siguiente">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Carousel -->
+    <div class="overflow-hidden" id="carousel-wrapper">
+      <div class="carousel-track" id="carousel-track">
+
+        <!-- Card Template – duplica esto para cada proyecto -->
+        <!-- CARD 01 -->
+        <div class="carousel-card group">
+          <div class="bg-surface-container border border-outline-variant rounded-sm overflow-hidden transition-all duration-300 hover:border-primary hover:glow-cyan h-full flex flex-col">
+            <div class="aspect-video overflow-hidden relative bg-surface-container-high flex items-center justify-center">
+              <!-- Placeholder visual – reemplaza con tu imagen/screenshot -->
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-tertiary/10"></div>
+              <div class="font-mono text-5xl font-bold text-primary/20 select-none">01</div>
+              <div class="absolute top-3 left-3 font-mono text-[10px] bg-surface-container-lowest/80 backdrop-blur-md px-2 py-1 border border-outline-variant text-on-surface">01</div>
+              <div class="absolute top-3 right-3"><span class="demo-badge">CASO DE ESTUDIO</span></div>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-grotesk font-semibold text-xl text-on-surface mb-2 group-hover:text-primary transition-colors">GADA-i</h3>
+              <p class="font-geist text-sm text-on-surface-variant mb-5 flex-grow leading-relaxed">Plataforma inteligente de gestión documental impulsada por IA. Clasificación automática, extracción de metadatos y procesamiento de contenido con Azure AI Search y RAG.</p>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="skill-badge bg-primary/10 text-primary border-primary/20">AZURE AI</span>
+                <span class="skill-badge bg-primary/10 text-primary border-primary/20">C#</span>
+                <span class="skill-badge bg-primary/10 text-primary border-primary/20">COSMOSDB</span>
+              </div>
+              <div class="flex items-center gap-3 pt-4 border-t border-outline-variant">
+                <span class="font-mono text-xs text-on-surface-variant italic">Proyecto empresarial · Sin código disponible</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 02 -->
+        <div class="carousel-card group">
+          <div class="bg-surface-container border border-outline-variant rounded-sm overflow-hidden transition-all duration-300 hover:border-primary hover:glow-cyan h-full flex flex-col">
+            <div class="aspect-video overflow-hidden relative bg-surface-container-high flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-br from-tertiary/20 via-transparent to-primary/10"></div>
+              <div class="font-mono text-5xl font-bold text-tertiary/20 select-none">02</div>
+              <div class="absolute top-3 left-3 font-mono text-[10px] bg-surface-container-lowest/80 backdrop-blur-md px-2 py-1 border border-outline-variant text-on-surface">02</div>
+              <div class="absolute top-3 right-3"><span class="demo-badge">CASO DE ESTUDIO</span></div>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-grotesk font-semibold text-xl text-on-surface mb-2 group-hover:text-primary transition-colors">Bergé API</h3>
+              <p class="font-geist text-sm text-on-surface-variant mb-5 flex-grow leading-relaxed">API inteligente basada en IA (Azure AI Foundry) para procesamiento automático de comunicaciones marítimas. Extrae metadatos estructurados de documentos no estructurados en tiempo real. Infraestructura IaC con Terraform.</p>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="skill-badge bg-primary/10 text-primary border-primary/20">AZURE AI</span>
+                <span class="skill-badge bg-primary/10 text-primary border-primary/20">TERRAFORM</span>
+                <span class="skill-badge bg-primary/10 text-primary border-primary/20">REST API</span>
+              </div>
+              <div class="flex items-center gap-3 pt-4 border-t border-outline-variant">
+                <span class="font-mono text-xs text-on-surface-variant italic">Proyecto empresarial · Sin código disponible</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 03 -->
+        <div class="carousel-card group">
+          <div class="bg-surface-container border border-outline-variant rounded-sm overflow-hidden transition-all duration-300 hover:border-primary hover:glow-cyan h-full flex flex-col">
+            <div class="aspect-video overflow-hidden relative bg-surface-container-high flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-br from-secondary/15 via-transparent to-primary/10"></div>
+              <div class="font-mono text-5xl font-bold text-secondary/20 select-none">03</div>
+              <div class="absolute top-3 left-3 font-mono text-[10px] bg-surface-container-lowest/80 backdrop-blur-md px-2 py-1 border border-outline-variant text-on-surface">03</div>
+              <div class="absolute top-3 right-3"><span class="demo-badge">CASO DE ESTUDIO</span></div>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-grotesk font-semibold text-xl text-on-surface mb-2 group-hover:text-primary transition-colors">bitDoc</h3>
+              <p class="font-geist text-sm text-on-surface-variant mb-5 flex-grow leading-relaxed">Primer software en España en obtener ISO/IEC 25000 Nivel 5. Plataforma de auditoría, trazabilidad y certificación de procesos de calidad. Estándares: ISO 15504 SPICE Nivel 3, firmezas con Viafirma.</p>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="skill-badge bg-primary/10 text-primary border-primary/20">.NET</span>
+                <span class="skill-badge bg-primary/10 text-primary border-primary/20">ISO 25000 L5</span>
+                <span class="skill-badge bg-primary/10 text-primary border-primary/20">VIAFIRMA</span>
+              </div>
+              <div class="flex items-center gap-3 pt-4 border-t border-outline-variant">
+                <span class="font-mono text-xs text-on-surface-variant italic">Proyecto empresarial · Sin código disponible</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 04 – placeholder para próximos proyectos -->
+        <div class="carousel-card group">
+          <div class="bg-surface-container border border-outline-variant border-dashed rounded-sm overflow-hidden transition-all duration-300 hover:border-primary/50 h-full flex flex-col items-center justify-center py-16 px-8 text-center">
+            <div class="w-14 h-14 border border-dashed border-outline-variant rounded-sm flex items-center justify-center mb-5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-on-surface-variant"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <p class="font-mono text-xs text-on-surface-variant mb-2 tracking-wider">PRÓXIMAMENTE</p>
+            <p class="font-geist text-sm text-on-surface-variant/60">Añade tu próximo proyecto aquí</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Carousel indicators -->
+    <div class="flex justify-center gap-2 mt-8" id="carousel-dots"></div>
+
+    <!-- Mobile arrows -->
+    <div class="flex justify-center gap-4 mt-6 md:hidden">
+      <button id="prev-btn-m" class="w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center text-on-surface-variant">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button id="next-btn-m" class="w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center text-on-surface-variant">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+<section id="about" class="py-20 md:py-32 px-5 md:px-16 max-w-[1200px] mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <!-- Bio terminal -->
+    <div class="lg:col-span-5 fade-up">
+      <div class="bg-surface-container rounded-lg border border-outline-variant overflow-hidden">
+        <div class="bg-surface-container-high px-4 py-3 flex items-center gap-2 border-b border-outline-variant">
+          <div class="terminal-dot bg-[#FF5F56]"></div>
+          <div class="terminal-dot bg-[#FFBD2E]"></div>
+          <div class="terminal-dot bg-[#27C93F]"></div>
+          <span class="font-mono text-[11px] text-on-surface-variant ml-2">about_me.md</span>
+        </div>
+        <div class="p-6 space-y-3 font-mono text-[13px]">
+          <div><span class="text-secondary"># </span><span class="text-on-surface font-bold">Álvaro Hernández Gil</span></div>
+          <div class="text-on-surface-variant leading-relaxed text-[12px]">Senior Developer | Document Management Architect | Cloud Security</div>
+          <div class="h-px bg-outline-variant my-3"></div>
+          <div class="space-y-2 text-[12px]">
+            <div><span class="text-primary">→ </span><span class="text-on-surface-variant">Localización: </span><span class="text-on-surface">España</span></div>
+            <div><span class="text-primary">→ </span><span class="text-on-surface-variant">Disponibilidad: </span><span class="text-secondary">ABIERTO_A_OPORTUNIDADES</span></div>
+            <div><span class="text-primary">→ </span><span class="text-on-surface-variant">Especialidad: </span><span class="text-on-surface">Azure / IA / Scrum</span></div>
+            <div><span class="text-primary">→ </span><span class="text-on-surface-variant">Email: </span><a href="mailto:alvarohernandezgil@gmail.com" class="text-primary hover:underline">alvarohernandezgil@gmail.com</a></div>
+          </div>
+          <div class="h-px bg-outline-variant my-3"></div>
+          <div class="text-[11px] text-on-surface-variant leading-relaxed">
+            <span class="text-secondary">// </span>15 años en sistemas de gestión documental con IA. Especialista en Azure, RAG, seguridad (ISO 27001/ENS) y transformación digital. Construyendo soluciones que generan valor e impacto medible.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text -->
+    <div class="lg:col-span-7 fade-up fade-up-d2">
+      <span class="font-mono text-xs text-secondary block mb-2 tracking-widest">// SOBRE_MÍ</span>
+      <h2 class="font-grotesk font-semibold text-3xl md:text-4xl text-on-surface mb-6">Arquitecto de soluciones<br/>con mentalidad de ingeniero.</h2>
+      <div class="space-y-4 font-geist text-base text-on-surface-variant leading-relaxed">
+        <p>
+          Mi carrera se ha construido en torno a la ingeniería de sistemas documentales complejos. Especialista en diseño e implantación de plataformas
+          seguras y escalables con IA: clasificación automática, RAG sobre Azure AI Search, trazabilidad y cumplimiento normativo.
+        </p>
+        <p>
+          Combino expertise técnica profunda en C#/.NET, Azure, Terraform e infraestructura cloud con gobernanza empresarial (ISO 27001, ENS, ISO 25000).
+          Lideré equipos que transformaron procesos manuales en pipelines automatizados con IA — reduciendo carga operativa ~80% en gestión documental.
+        </p>
+      </div>
+
+      <!-- Soft skills -->
+      <div class="grid grid-cols-2 gap-3 mt-8">
+        <div class="bg-surface-container p-4 rounded-sm border border-outline-variant">
+          <div class="text-primary mb-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="font-mono text-xs text-on-surface font-bold mb-1">ARQUITECTURA</div>
+          <div class="font-geist text-xs text-on-surface-variant">Diseño escalable desde el primer commit.</div>
+        </div>
+        <div class="bg-surface-container p-4 rounded-sm border border-outline-variant">
+          <div class="text-secondary mb-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <div class="font-mono text-xs text-on-surface font-bold mb-1">INFRAESTRUCTURA</div>
+          <div class="font-geist text-xs text-on-surface-variant">IaC, cloud-native, resiliente.</div>
+        </div>
+        <div class="bg-surface-container p-4 rounded-sm border border-outline-variant">
+          <div class="text-tertiary mb-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="font-mono text-xs text-on-surface font-bold mb-1">LIDERAZGO ÁGIL</div>
+          <div class="font-geist text-xs text-on-surface-variant">Scrum Master certificado, equipos de alto rendimiento.</div>
+        </div>
+        <div class="bg-surface-container p-4 rounded-sm border border-outline-variant">
+          <div class="text-primary mb-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="font-mono text-xs text-on-surface font-bold mb-1">TRANSFORMACIÓN</div>
+          <div class="font-geist text-xs text-on-surface-variant">Impulso de cambio digital en organizaciones.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ STACK ═══════════════════════════ -->
+<section id="stack" class="py-20 md:py-32 bg-surface-container-lowest">
+  <div class="px-5 md:px-16 max-w-[1200px] mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <span class="font-mono text-xs text-secondary block mb-2 tracking-widest">// TECH_STACK</span>
+      <h2 class="font-grotesk font-semibold text-3xl md:text-4xl text-on-surface">Herramientas del oficio</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Frontend -->
+      <div class="bg-surface-container p-6 rounded-sm border border-outline-variant fade-up">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-8 h-8 bg-primary/10 border border-primary/20 rounded-sm flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4cd7f6" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+          </div>
+          <span class="font-mono text-xs text-primary font-bold tracking-widest">FRONTEND</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-geist text-sm text-on-surface">Angular / SPFX</span><span class="font-mono text-xs text-primary">85%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="85"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-geist text-sm text-on-surface">HTML5 / CSS3</span><span class="font-mono text-xs text-primary">95%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="95"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-geist text-sm text-on-surface">JavaScript / jQuery</span><span class="font-mono text-xs text-primary">90%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="90"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-geist text-sm text-on-surface">UX / Dise\u00f1o</span><span class="font-mono text-xs text-primary">80%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div class="bg-surface-container p-6 rounded-sm border border-outline-variant fade-up fade-up-d2">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-8 h-8 bg-secondary/10 border border-secondary/20 rounded-sm flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94de2d" stroke-width="1.5"><path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="8" y1="20" x2="8.01" y2="20"/><line x1="12" y1="18" x2="12.01" y2="18"/><line x1="12" y1="22" x2="12.01" y2="22"/><line x1="16" y1="16" x2="16.01" y2="16"/><line x1="16" y1="20" x2="16.01" y2="20"/></svg>
+          </div>
+          <span class="font-mono text-xs text-secondary font-bold tracking-widest">BACKEND</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-geist text-sm text-on-surface">C# / .NET Core</span><span class="font-mono text-xs text-secondary">98%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="98" style="background: linear-gradient(90deg, #94de2d, #4cd7f6)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-geist text-sm text-on-surface">SQL Server / MySQL</span><span class="font-mono text-xs text-secondary">95%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="95" style="background: linear-gradient(90deg, #94de2d, #4cd7f6)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-geist text-sm text-on-surface\">CosmosDB / NoSQL</span><span class="font-mono text-xs text-secondary">90%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="90" style="background: linear-gradient(90deg, #94de2d, #4cd7f6)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-geist text-sm text-on-surface">REST APIs / LINQ</span><span class="font-mono text-xs text-secondary">92%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="92" style="background: linear-gradient(90deg, #94de2d, #4cd7f6)"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cloud & Infrastructure -->
+      <div class="bg-surface-container p-6 rounded-sm border border-outline-variant fade-up fade-up-d3">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-8 h-8 bg-tertiary/10 border border-tertiary/20 rounded-sm flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c0c1ff" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <span class="font-mono text-xs text-tertiary font-bold tracking-widest">CLOUD & INFRA</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">AZURE</span>
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">TERRAFORM</span>
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">DOCKER</span>
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">SHAREPOINT</span>
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">AZURE AI</span>
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">AZURE SEARCH</span>
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">VIAFIRMA</span>
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">NINTEX</span>
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">KQL</span>
+          <span class="skill-badge bg-tertiary/10 text-tertiary border-tertiary/20">ISO/ENS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ EXPERIENCE ═══════════════════════════ -->
+<section id="experience" class="py-20 md:py-32 px-5 md:px-16 max-w-[1200px] mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-4 fade-up">
+      <span class="font-mono text-xs text-secondary block mb-2 tracking-widest">// TRAYECTORIA</span>
+      <h2 class="font-grotesk font-semibold text-3xl md:text-4xl text-on-surface mb-6">Experiencia<br/>& Formación</h2>
+      <p class="font-geist text-sm text-on-surface-variant leading-relaxed">
+        Un historial de trabajo en entornos de alto impacto, construyendo productos que importan con equipos que exigen excelencia.
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="lg:col-span-8 fade-up fade-up-d2">
+      <!-- Tabs -->
+      <div class="flex gap-1 mb-8 border-b border-outline-variant">
+        <button class="exp-tab active font-mono text-xs px-4 py-3 text-primary border-b-2 border-primary" data-tab="work">TRABAJO</button>
+        <button class="exp-tab font-mono text-xs px-4 py-3 text-on-surface-variant border-b-2 border-transparent hover:text-primary transition-colors" data-tab="edu">EDUCACIÓN</button>
+      </div>
+
+      <!-- Work -->
+      <div id="tab-work" class="space-y-8">
+        <div class="flex gap-5 relative">
+          <div class="flex flex-col items-center">
+            <div class="timeline-dot mt-1"></div>
+            <div class="w-px flex-grow bg-outline-variant mt-2"></div>
+          </div>
+          <div class="pb-8">
+            <div class="flex flex-wrap items-center gap-3 mb-1">
+              <h3 class="font-grotesk font-semibold text-lg text-on-surface">Cloud Solutions Developer / Team Leader</h3>
+              <span class="font-mono text-[10px] text-primary bg-primary/10 border border-primary/20 px-2 py-0.5">ACTUAL</span>
+            </div>
+            <div class="font-mono text-xs text-on-surface-variant mb-3">ENCAMINA · 2018 – Presente</div>
+            <p class="font-geist text-sm text-on-surface-variant leading-relaxed">Lideré arquitectura de extremo a extremo de GADA-i: plataforma de gestión documental con IA en Azure. Implementé clasificación inteligente y RAG sobre AI Search, reduciendo tratamiento manual ~80%. API inteligente para documentación marítima (Bergé) con Azure AI Foundry + Terraform. Framework de observabilidad con Application Insights (reducción de tiempo detección incidentes ~60%).</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="skill-badge bg-primary/10 text-primary border-primary/20">AZURE AI</span>
+              <span class="skill-badge bg-primary/10 text-primary border-primary/20">RAG</span>
+              <span class="skill-badge bg-primary/10 text-primary border-primary/20">TERRAFORM</span>
+              <span class="skill-badge bg-primary/10 text-primary border-primary/20">ISO 27001</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-5 relative">
+          <div class="flex flex-col items-center">
+            <div class="timeline-dot mt-1 opacity-60"></div>
+            <div class="w-px flex-grow bg-outline-variant mt-2"></div>
+          </div>
+          <div class="pb-8">
+            <h3 class="font-grotesk font-semibold text-lg text-on-surface mb-1">Técnico SharePoint</h3>
+            <div class="font-mono text-xs text-on-surface-variant mb-3">AVANTIA · 2016 – 2018</div>
+            <p class="font-geist text-sm text-on-surface-variant leading-relaxed">Plataforma integral de gestión de documentación jurídica sobre SharePoint Online con Angular JS y SPFX. Implementé flujos documentales estructurados, control de acceso granular y seguimiento de expedientes. Integración con sistemas Infolex.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="skill-badge bg-primary/10 text-primary border-primary/20">SHAREPOINT ONLINE</span>
+              <span class="skill-badge bg-primary/10 text-primary border-primary/20">ANGULAR JS</span>
+              <span class="skill-badge bg-primary/10 text-primary border-primary/20">SPFX</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-5 relative">
+          <div class="flex flex-col items-center">
+            <div class="timeline-dot mt-1 opacity-40"></div>
+          </div>
+          <div>
+            <h3 class="font-grotesk font-semibold text-lg text-on-surface mb-1">Desarrollador y Analista Senior</h3>
+            <div class="font-mono text-xs text-on-surface-variant mb-3">BITWARE S.L. · 2008 – 2016</div>
+            <p class="font-geist text-sm text-on-surface-variant leading-relaxed">Desarrollador clave de bitDoc: primer software en España en obtener ISO/IEC 25000 Nivel 5 + ISO 15504 SPICE Nivel 3. Ciberseguridad para Administración Pública con Viafirma (firma digital). Optimicé procesamiento de datos de 18h → 8h (55% mejora throughput).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education (hidden) -->
+      <div id="tab-edu" class="space-y-8 hidden">
+        <div class="flex gap-5 relative">
+          <div class="flex flex-col items-center">
+            <div class="timeline-dot mt-1"></div>
+            <div class="w-px flex-grow bg-outline-variant mt-2"></div>
+          </div>
+          <div class="pb-8">
+            <h3 class="font-grotesk font-semibold text-lg text-on-surface mb-1">Técnico Superior en Desarrollo de Aplicaciones (FP II)</h3>
+            <div class="font-mono text-xs text-on-surface-variant mb-3">Salamanca · Formación Profesional</div>
+            <p class="font-geist text-sm text-on-surface-variant leading-relaxed">Especialización: Programador Especialista C#.NET (425 horas). Formación complementaria en UX para Devs, Arquitectura de Software y Gestión de Equipos.</p>
+          </div>
+        </div>
+        <div class="flex gap-5 relative">
+          <div class="flex flex-col items-center">
+            <div class="timeline-dot mt-1 opacity-60"></div>
+          </div>
+          <div>
+            <h3 class="font-grotesk font-semibold text-lg text-on-surface mb-1">Certificaciones Profesionales</h3>
+            <div class="font-mono text-xs text-on-surface-variant mb-3">Scrum / Cloud / Seguridad</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-badge bg-secondary/10 text-secondary border-secondary/20">AZ-900 AZURE</span>
+              <span class="skill-badge bg-secondary/10 text-secondary border-secondary/20">SCRUM MASTER</span>
+              <span class="skill-badge bg-secondary/10 text-secondary border-secondary/20">ISO 27001</span>
+              <span class="skill-badge bg-secondary/10 text-secondary border-secondary/20">ISO 25000</span>
+              <span class="skill-badge bg-secondary/10 text-secondary border-secondary/20">ISO 15504 SPICE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ DESCARGAR CV ═══════════════════════════ -->
+<section id="cv" class="py-20 md:py-32 px-5 md:px-16 max-w-[1200px] mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-7 fade-up">
+      <span class="font-mono text-xs text-secondary block mb-2 tracking-widest">// CURRICULUM_VITAE</span>
+      <h2 class="font-grotesk font-semibold text-3xl md:text-4xl text-on-surface mb-6">15+ años de trayectoria en mi CV</h2>
+      <p class="font-geist text-base text-on-surface-variant mb-6 leading-relaxed">
+        Descarga mi CV completo en PDF. Contiene detalles completos de experiencia, tecnologías, certificaciones y logros cuantificables en gestión documental, cloud y seguridad.
+      </p>
+      <div class="space-y-4 mb-8">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center flex-shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4cd7f6" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="13" x2="12" y2="19"/><line x1="9" y1="16" x2="15" y2="16"/></svg>
+          </div>
+          <div>
+            <div class="font-grotesk font-semibold text-on-surface mb-1">Formato PDF optimizado</div>
+            <div class="font-geist text-sm text-on-surface-variant">Listo para imprimir o enviar a reclutadores</div>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-secondary/10 rounded-sm flex items-center justify-center flex-shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94de2d" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M20 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h11"/></svg>
+          </div>
+          <div>
+            <div class="font-grotesk font-semibold text-on-surface mb-1">Contenido verificado</div>
+            <div class="font-geist text-sm text-on-surface-variant">Experiencia real, tecnologías concretas, métricas de impacto</div>
+          </div>
+        </div>
+      </div>
+      <div class="inline-flex items-center gap-3">
+        <div class="relative inline-block">
+          <button id="cv-format-toggle" class="grad-btn text-on-primary px-4 py-2 font-mono text-sm font-bold rounded-sm flex items-center gap-2 glow-btn hover:brightness-110 transition-all">
+            DESCARGAR CV
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div id="cv-format-menu" class="hidden absolute right-0 mt-2 w-44 bg-surface-container rounded-sm border border-outline-variant p-2 shadow-lg">
+            <button data-format="pdf" class="w-full text-left px-3 py-2 font-mono text-xs text-on-surface hover:bg-surface/20">Descargar PDF</button>
+            <button data-format="html" class="w-full text-left px-3 py-2 font-mono text-xs text-on-surface hover:bg-surface/20">Descargar HTML</button>
+            <button data-format="open-html" class="w-full text-left px-3 py-2 font-mono text-xs text-on-surface hover:bg-surface/20">Abrir HTML</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lg:col-span-5 fade-up fade-up-d2">
+      <div class="bg-surface-container-low border border-outline-variant rounded-sm p-8 space-y-6">
+        <div class="border-b border-outline-variant pb-4">
+          <div class="font-mono text-xs text-secondary tracking-widest mb-2">CONTENIDO DEL CV</div>
+          <div class="space-y-2 font-geist text-sm text-on-surface-variant">
+            <div class="flex items-center gap-2"><span class="text-primary">✓</span> 3 empresas principales (ENCAMINA, AVANTIA, BITWARE)</div>
+            <div class="flex items-center gap-2"><span class="text-primary">✓</span> Proyectos destacados (GADA-i, Bergé, bitDoc)</div>
+            <div class="flex items-center gap-2"><span class="text-primary">✓</span> 18+ tecnologías principales</div>
+            <div class="flex items-center gap-2"><span class="text-primary">✓</span> Certificaciones clave</div>
+            <div class="flex items-center gap-2"><span class="text-primary">✓</span> Logros cuantificables</div>
+            <div class="flex items-center gap-2"><span class="text-primary">✓</span> Idiomas (ES/EN)</div>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="font-mono text-xs text-on-surface-variant tracking-widest">CONTACTO</div>
+          <a href="mailto:alvarohernandezgil@gmail.com" class="flex items-center gap-2 font-mono text-xs text-primary hover:text-secondary transition-colors">
+            → alvarohernandezgil@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/alvarohernandezgil/" target="_blank" class="flex items-center gap-2 font-mono text-xs text-primary hover:text-secondary transition-colors">
+            → linkedin.com/in/alvarohernandezgil
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CV DESCARGABLE ═══════════════════════════ -->
+<section id="cv" class="py-20 md:py-32 px-5 md:px-16 max-w-[1200px] mx-auto bg-surface-container-lowest">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="fade-up">
+      <span class="font-mono text-xs text-secondary block mb-2 tracking-widest">// DESCARGAR_CV</span>
+      <h2 class="font-grotesk font-semibold text-3xl md:text-4xl text-on-surface mb-4">CV Profesional</h2>
+      <p class="font-geist text-sm text-on-surface-variant leading-relaxed mb-8">Documento completo con 15 años de experiencia en arquitectura cloud, gestión de documentos y liderazgo técnico. Incluye certificaciones, proyectos destacados y stack tecnológico.</p>
+      
+      <div class="space-y-3 mb-8">
+        <div class="flex items-center gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary flex-shrink-0"><path d="M12 2v20M2 12h20"/></svg>
+          <span class="font-geist text-sm text-on-surface-variant">15 años en desarrollo y arquitectura</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary flex-shrink-0"><path d="M12 2v20M2 12h20"/></svg>
+          <span class="font-geist text-sm text-on-surface-variant">50+ proyectos empresariales completados</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary flex-shrink-0"><path d="M12 2v20M2 12h20"/></svg>
+          <span class="font-geist text-sm text-on-surface-variant">3 empresas: ENCAMINA, AVANTIA, BITWARE</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary flex-shrink-0"><path d="M12 2v20M2 12h20"/></svg>
+          <span class="font-geist text-sm text-on-surface-variant">Certificaciones: Azure, ISO, Scrum Master</span>
+        </div>
+      </div>
+
+      <div class="inline-flex items-center gap-2">
+        <button id="cv-download-pdf" class="bg-primary text-on-primary px-6 py-3 font-mono text-xs font-bold rounded-sm hover:brightness-110 transition-all">PDF</button>
+        <button id="cv-download-html" class="border border-outline-variant text-on-surface px-6 py-3 font-mono text-xs font-bold rounded-sm hover:bg-surface/10 transition-all">HTML</button>
+      </div>
+    </div>
+
+    <div class="bg-surface-container p-6 rounded-sm border border-outline-variant fade-up fade-up-d2">
+      <h3 class="font-mono text-xs text-secondary font-bold mb-4 tracking-widest">CONTENIDO DEL CV:</h3>
+      <div class="space-y-3">
+        <div class="flex items-start gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-lime-400 flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          <span class="font-geist text-sm text-on-surface">Resumen profesional y objetivos</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-lime-400 flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          <span class="font-geist text-sm text-on-surface">Experiencia laboral (3 empresas, 8+ proyectos)</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-lime-400 flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          <span class="font-geist text-sm text-on-surface">Stack tecnológico (25+ tecnologías)</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-lime-400 flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          <span class="font-geist text-sm text-on-surface">Certificaciones y formación continua</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-lime-400 flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          <span class="font-geist text-sm text-on-surface">Habilidades técnicas y de liderazgo</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-lime-400 flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          <span class="font-geist text-sm text-on-surface">Idiomas y competencias complementarias</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+<section id="contact" class="py-20 md:py-32 px-5 md:px-16 max-w-[1200px] mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <div class="lg:col-span-5 fade-up">
+      <span class="font-mono text-xs text-secondary block mb-2 tracking-widest">// CONTACTO</span>
+      <h2 class="font-grotesk font-semibold text-3xl md:text-4xl text-on-surface mb-4">Hablemos.</h2>
+      <p class="font-geist text-sm text-on-surface-variant leading-relaxed mb-8">Disponible para proyectos freelance, posiciones a tiempo completo o simplemente charlar sobre tecnología. La respuesta media es &lt;24h.</p>
+
+      <div class="space-y-4">
+      <a href="mailto:alvarohernandezgil@gmail.com" class="flex items-center gap-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-primary"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          alvarohernandezgil@gmail.com
+        </a>
+        <a href="https://linkedin.com" target="_blank" class="flex items-center gap-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-primary"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/tuusuario
+        </a>
+        <a href="https://github.com" target="_blank" class="flex items-center gap-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-primary"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          github.com/tuusuario
+        </a>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="lg:col-span-7 fade-up fade-up-d2">
+      <div class="bg-surface-container p-8 rounded-sm border border-outline-variant">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+          <div>
+            <label class="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">NOMBRE</label>
+            <input type="text" class="form-input" placeholder="Tu nombre">
+          </div>
+          <div>
+            <label class="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">EMAIL</label>
+            <input type="email" class="form-input" placeholder="tu@email.com" value="alvarohernandezgil@gmail.com">
+          </div>
+        </div>
+        <div class="mb-6">
+          <label class="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">ASUNTO</label>
+          <input type="text" class="form-input" placeholder="¿De qué quieres hablar?">
+        </div>
+        <div class="mb-8">
+          <label class="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">MENSAJE</label>
+          <textarea rows="4" class="form-input resize-none" placeholder="Tu mensaje aquí..."></textarea>
+        </div>
+        <button class="w-full grad-btn text-on-primary py-3.5 font-mono text-xs font-bold rounded-sm glow-btn hover:brightness-110 transition-all">
+          ENVIAR_MENSAJE →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="border-t border-outline-variant bg-surface-container-lowest">
+  <div class="flex flex-col md:flex-row justify-between items-center py-8 px-5 md:px-16 max-w-[1200px] mx-auto gap-6">
+    <div>
+      <span class="font-grotesk font-bold text-secondary text-base">ÁLVARO.DEV</span>
+      <p class="font-mono text-[10px] text-on-surface-variant mt-1">© 2024 · CLOUD ARCHITECTURE & LEADERSHIP</p>
+    </div>
+    <div class="flex gap-8">
+      <a href="https://github.com" target="_blank" class="font-mono text-xs text-on-surface-variant hover:text-secondary transition-colors">GitHub</a>
+      <a href="https://linkedin.com" target="_blank" class="font-mono text-xs text-on-surface-variant hover:text-secondary transition-colors">LinkedIn</a>
+      <a href="mailto:alvarohernandezgil@gmail.com" class="font-mono text-xs text-on-surface-variant hover:text-secondary transition-colors">contacto</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+      <span class="font-mono text-[10px] text-on-surface-variant tracking-tighter">STATUS: TODOS LOS SISTEMAS OPERATIVOS</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════ SCRIPTS ═══════════════════════════ -->
+<script>
+// ── Fade-in on scroll ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ── Stat counter ──
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.querySelectorAll('[data-target]').forEach(el => {
+      const target = parseInt(el.dataset.target);
+      let cur = 0;
+      const step = Math.ceil(target / 30);
+      const timer = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = cur + (el.dataset.suffix || '+');
+        if (cur >= target) clearInterval(timer);
+      }, 50);
+    });
+    statObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.5 });
+const heroSection = document.querySelector('#hero');
+if (heroSection) statObserver.observe(heroSection);
+
+// ── Progress bars ──
+const progressObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.querySelectorAll('.progress-fill').forEach(bar => {
+      bar.style.width = bar.dataset.width + '%';
+    });
+    progressObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.3 });
+document.querySelector('#stack') && progressObserver.observe(document.querySelector('#stack'));
+
+// ── Carousel ──
+const track = document.getElementById('carousel-track');
+const cards = track ? track.querySelectorAll('.carousel-card') : [];
+let current = 0;
+
+function getVisible() {
+  if (window.innerWidth >= 1024) return 3;
+  if (window.innerWidth >= 640) return 2;
+  return 1;
+}
+
+function getCardWidth() {
+  if (!cards.length) return 0;
+  return cards[0].getBoundingClientRect().width + 24; // gap
+}
+
+function moveTo(idx) {
+  const maxIdx = Math.max(0, cards.length - getVisible());
+  current = Math.max(0, Math.min(idx, maxIdx));
+  track.style.transform = `translateX(-${current * getCardWidth()}px)`;
+  updateDots();
+}
+
+function updateDots() {
+  const dotsContainer = document.getElementById('carousel-dots');
+  const maxIdx = Math.max(0, cards.length - getVisible());
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i <= maxIdx; i++) {
+      const d = document.createElement('button');
+      d.className = `w-1.5 h-1.5 rounded-full transition-all ${i === current ? 'bg-primary w-4' : 'bg-outline-variant'}`;
+      d.addEventListener('click', () => moveTo(i));
+      dotsContainer.appendChild(d);
+    }
+  }
+}
+
+['prev-btn','prev-btn-m'].forEach(id => {
+  const btn = document.getElementById(id);
+  if (btn) btn.addEventListener('click', () => moveTo(current - 1));
+});
+['next-btn','next-btn-m'].forEach(id => {
+  const btn = document.getElementById(id);
+  if (btn) btn.addEventListener('click', () => moveTo(current + 1));
+});
+
+window.addEventListener('resize', () => moveTo(current));
+
+// Touch swipe
+let touchStart = 0;
+if (track) {
+  track.addEventListener('touchstart', e => { touchStart = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = touchStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) moveTo(diff > 0 ? current + 1 : current - 1);
+  });
+}
+
+setTimeout(updateDots, 100);
+
+// ── Mobile nav ──
+const mobileNav = document.getElementById('mobile-nav');
+const overlay = document.getElementById('overlay');
+document.getElementById('menu-btn')?.addEventListener('click', () => {
+  mobileNav.classList.add('open');
+  overlay.classList.remove('hidden');
+});
+function closeNav() { mobileNav.classList.remove('open'); overlay.classList.add('hidden'); }
+document.getElementById('close-menu')?.addEventListener('click', closeNav);
+overlay?.addEventListener('click', closeNav);
+document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeNav));
+
+// ── Experience tabs ──
+document.querySelectorAll('.exp-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.exp-tab').forEach(t => {
+      t.classList.remove('active','text-primary','border-primary');
+      t.classList.add('text-on-surface-variant','border-transparent');
+    });
+    tab.classList.add('active','text-primary','border-primary');
+    tab.classList.remove('text-on-surface-variant','border-transparent');
+    document.querySelectorAll('#tab-work, #tab-edu').forEach(p => p.classList.add('hidden'));
+    const target = document.getElementById('tab-' + tab.dataset.tab);
+    if (target) target.classList.remove('hidden');
+  });
+});
+
+// ── Nav scroll effect ──
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  if (window.scrollY > 20) {
+    nav.classList.add('bg-surface/80');
+  } else {
+    nav.classList.remove('bg-surface/80');
+  }
+});
+// Load config and download service as classic scripts to avoid file:// CORS issues
+</script>
+<script src="./infrastructure/config/app-config.js"></script>
+<script src="./infrastructure/download/download-service.js"></script>
+<script>
+  const pdfFilename = (window.AppConfig && window.AppConfig.cv && window.AppConfig.cv.pdf) ? window.AppConfig.cv.pdf.split('/').pop() : 'Alvaro_Hernandez_Gil_CV_ES.pdf';
+  const htmlFilename = (window.AppConfig && window.AppConfig.cv && window.AppConfig.cv.html) ? window.AppConfig.cv.html.split('/').pop() : 'cv-alvaro-hernandez.html';
+
+  function downloadPdf() { window.DownloadService.downloadPDF(pdfFilename); }
+  function downloadHtml() { window.DownloadService.downloadHTML(htmlFilename); }
+
+  // Nav buttons (default to PDF)
+  document.getElementById('resume-btn-desktop')?.addEventListener('click', (e) => { e.preventDefault(); downloadPdf(); });
+  document.getElementById('resume-btn-mobile')?.addEventListener('click', (e) => { e.preventDefault(); downloadPdf(); });
+
+  // Hero button opens CV section and reveals format menu
+  document.getElementById('hero-download-btn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector('#cv')?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => { document.getElementById('cv-format-menu')?.classList.remove('hidden'); }, 600);
+  });
+
+  // CV format toggle/menu in CV section
+  const toggle = document.getElementById('cv-format-toggle');
+  const menu = document.getElementById('cv-format-menu');
+  toggle?.addEventListener('click', (e) => { e.preventDefault(); menu.classList.toggle('hidden'); });
+
+  menu?.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-format]');
+    if (!btn) return;
+    const f = btn.dataset.format;
+    if (f === 'pdf') downloadPdf();
+    else if (f === 'html') downloadHtml();
+    else if (f === 'open-html') window.open(window.AppConfig.cv.html, '_blank');
+    menu.classList.add('hidden');
+  });
+
+  // Explicit buttons in the CV download section
+  document.getElementById('cv-download-pdf')?.addEventListener('click', (e) => { e.preventDefault(); downloadPdf(); });
+  document.getElementById('cv-download-html')?.addEventListener('click', (e) => { e.preventDefault(); downloadHtml(); });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!menu) return;
+    if (!menu.classList.contains('hidden') && !menu.contains(e.target) && e.target !== toggle) {
+      menu.classList.add('hidden');
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV - Álvaro Hernández Gil</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6; 
+      color: #333; 
+      background: white;
+      padding: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .header { margin-bottom: 30px; border-bottom: 3px solid #0056b3; padding-bottom: 20px; }
+    .header h1 { font-size: 32px; color: #0056b3; margin-bottom: 5px; }
+    .subtitle { font-size: 16px; color: #666; margin-bottom: 10px; font-weight: 500; }
+    .contact-info { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; }
+    .contact-info a { color: #0056b3; text-decoration: none; }
+    
+    .section { margin: 30px 0; }
+    .section h2 { 
+      font-size: 18px; 
+      color: #0056b3; 
+      border-bottom: 2px solid #0056b3; 
+      padding-bottom: 8px; 
+      margin-bottom: 15px;
+    }
+    
+    .job-entry { margin-bottom: 20px; }
+    .job-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+    .job-title { font-weight: bold; font-size: 15px; }
+    .company { color: #0056b3; font-weight: 600; }
+    .dates { color: #999; font-size: 13px; }
+    .job-description { color: #555; font-size: 14px; margin-top: 8px; line-height: 1.5; }
+    
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .skill-category h3 { font-size: 14px; font-weight: bold; color: #0056b3; margin-bottom: 8px; }
+    .skill-category ul { list-style: none; }
+    .skill-category li { font-size: 13px; padding: 3px 0; color: #555; }
+    .skill-category li:before { content: "▪ "; color: #0056b3; margin-right: 8px; }
+    
+    .badge { 
+      display: inline-block; 
+      background: #f0f0f0; 
+      padding: 4px 10px; 
+      border-radius: 12px; 
+      font-size: 12px; 
+      margin: 3px 3px 3px 0; 
+      color: #0056b3;
+      font-weight: 500;
+    }
+    
+    .summary { 
+      background: #f9f9f9; 
+      padding: 15px; 
+      border-left: 4px solid #0056b3; 
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+    }
+    
+    @media print {
+      body { padding: 20px; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Álvaro Hernández Gil</h1>
+  <div class="subtitle">Senior Developer · Document Management Architect · Cloud Security Specialist</div>
+  <div class="contact-info">
+    <span>📍 Madrid, España</span>
+    <span>📞 +34 654 80 21 16</span>
+    <span><a href="mailto:alvarohernandezgil@gmail.com">📧 alvarohernandezgil@gmail.com</a></span>
+    <span><a href="https://www.linkedin.com/in/alvarohernandezgil/" target="_blank">🔗 LinkedIn</a></span>
+  </div>
+</div>
+
+<div class="summary">
+  <strong>Resumen Profesional:</strong> Desarrollador Full Stack con 15+ años de experiencia especializado en sistemas de gestión documental potenciados por IA, arquitecturas .NET (C#, .NET Core) y soluciones Cloud en Azure. Experto en el diseño e implantación de plataformas documentales seguras y escalables con capacidades avanzadas de clasificación inteligente, búsqueda semántica y RAG. Trayectoria contrastada en cumplimiento de ISO/IEC 25000, ISO 15504 SPICE, ISO 27001 y el Esquema Nacional de Seguridad (ENS).
+</div>
+
+<!-- EXPERIENCIA PROFESIONAL -->
+<div class="section">
+  <h2>EXPERIENCIA PROFESIONAL</h2>
+  
+  <div class="job-entry">
+    <div class="job-header">
+      <span><span class="company">ENCAMINA</span> · <span class="job-title">Cloud Solutions Developer / Team Leader</span></span>
+      <span class="dates">2018 – Presente</span>
+    </div>
+    <div class="job-description">
+      <p><strong>Plataforma de Gestión Documental con IA (GADA-i):</strong> Lideré la arquitectura de extremo a extremo de una solución empresarial de gestión documental sobre Azure. Implementé clasificación inteligente y recuperación de activos desde SharePoint mediante RAG sobre Azure AI Search, reduciendo el tratamiento manual de documentos en ~80% y habilitando búsqueda semántica sobre grandes repositorios.</p>
+      <p style="margin-top: 8px;"><strong>API Inteligente para Documentación Marítima (Bergé — Azure AI Foundry):</strong> Diseñé y desarrollé una API basada en IA para el procesamiento automatizado de comunicaciones marítimas, extrayendo metadatos estructurados en tiempo real. Infraestructura IaC con Terraform.</p>
+      <p style="margin-top: 8px;"><strong>Framework de Observabilidad en Producción (Bestinver):</strong> Construí un sistema de monitoreo y alertas con Azure Application Insights y KQL, reduciendo el tiempo medio de detección de incidentes en ~60%.</p>
+      <p style="margin-top: 8px;"><strong>Gobernanza ISO 27001 y ENS:</strong> Lideré la auditoría de procesos internos y estandarización para renovación de certificación ISO 27001.</p>
+      <div style="margin-top: 10px;">
+        <span class="badge">AZURE AI</span>
+        <span class="badge">RAG</span>
+        <span class="badge">TERRAFORM</span>
+        <span class="badge">C#</span>
+        <span class="badge">ISO 27001</span>
+        <span class="badge">SHAREPOINT</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="job-entry">
+    <div class="job-header">
+      <span><span class="company">AVANTIA</span> · <span class="job-title">Técnico SharePoint</span></span>
+      <span class="dates">2016 – 2018</span>
+    </div>
+    <div class="job-description">
+      <p><strong>Plataforma Jurídica Documental:</strong> Desarrollé una solución integral de gestión de documentación jurídica integrada con Infolex, construida sobre SharePoint Online con Angular JS y SPFX. Cubrí flujos documentales estructurados, control de acceso granular y seguimiento de expedientes.</p>
+      <div style="margin-top: 10px;">
+        <span class="badge">SHAREPOINT ONLINE</span>
+        <span class="badge">ANGULAR JS</span>
+        <span class="badge">SPFX</span>
+        <span class="badge">REST APIs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="job-entry">
+    <div class="job-header">
+      <span><span class="company">BITWARE S.L.</span> · <span class="job-title">Desarrollador y Analista Senior</span></span>
+      <span class="dates">2008 – 2016</span>
+    </div>
+    <div class="job-description">
+      <p><strong>Certificación ISO/IEC 25000 Nivel 5 (bitDoc):</strong> Desarrollador clave del primer software en España en obtener esta certificación de calidad, garantizando los más altos estándares de mantenibilidad, fiabilidad y rendimiento. Participé en la consecución de ISO 15504 SPICE Nivel 3.</p>
+      <p style="margin-top: 8px;"><strong>Ciberseguridad para la Administración Pública:</strong> Implementé modelos de seguridad nacional mediante infraestructura de firma y certificado digital (Viafirma) para organismos públicos.</p>
+      <p style="margin-top: 8px;"><strong>Optimización de Rendimiento (GTI-DIODE):</strong> Optimicé servicios de procesamiento de datos de alto volumen reduciendo el tiempo de ejecución de 18 horas a menos de 8 horas (55% mejora).</p>
+      <div style="margin-top: 10px;">
+        <span class="badge">.NET</span>
+        <span class="badge">ISO 25000 L5</span>
+        <span class="badge">VIAFIRMA</span>
+        <span class="badge">C#</span>
+        <span class="badge">SQL SERVER</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETENCIAS CLAVE -->
+<div class="section">
+  <h2>COMPETENCIAS CLAVE</h2>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h3>Gestión Documental & IA</h3>
+      <ul>
+        <li>Clasificación automática de documentos</li>
+        <li>Pipelines RAG (Retrieval-Augmented Generation)</li>
+        <li>Azure AI Search (búsqueda semántica)</li>
+        <li>Extracción de metadatos</li>
+        <li>SharePoint document management</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Cloud & Infraestructura</h3>
+      <ul>
+        <li>Azure (PaaS/IaaS)</li>
+        <li>Terraform (Infrastructure as Code)</li>
+        <li>Azure AI Foundry</li>
+        <li>CosmosDB</li>
+        <li>Azure Application Insights</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Backend & Desarrollo</h3>
+      <ul>
+        <li>C# / .NET Core</li>
+        <li>REST APIs</li>
+        <li>LINQ</li>
+        <li>SQL Server / MySQL</li>
+        <li>Domain-Driven Design</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Seguridad & Cumplimiento</h3>
+      <ul>
+        <li>ISO 27001</li>
+        <li>Esquema Nacional de Seguridad (ENS)</li>
+        <li>ISO/IEC 25000</li>
+        <li>ISO 15504 SPICE</li>
+        <li>Firma Digital (Viafirma)</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Frontend & UX</h3>
+      <ul>
+        <li>Angular JS</li>
+        <li>SPFX (SharePoint Framework)</li>
+        <li>HTML5 / CSS3</li>
+        <li>JavaScript</li>
+        <li>UX para Developers</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Otros</h3>
+      <ul>
+        <li>Scrum Master (Agile)</li>
+        <li>Observabilidad (KQL)</li>
+        <li>GitHub Actions (CI/CD)</li>
+        <li>Gestión de Equipos</li>
+        <li>Arquitectura de Software</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FORMACIÓN Y CERTIFICACIONES -->
+<div class="section">
+  <h2>FORMACIÓN Y CERTIFICACIONES</h2>
+  
+  <div class="job-entry">
+    <div class="job-title">Certificaciones Profesionales</div>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="margin-bottom: 8px;"><strong>AZ-900: Azure Fundamentals</strong> — Microsoft (2019)</li>
+      <li style="margin-bottom: 8px;"><strong>Scrum Master</strong> — Gestión Ágil de Proyectos (2022)</li>
+      <li style="margin-bottom: 8px;"><strong>ISO 27001 / ISO 25000</strong> — Cumplimiento y Auditoría</li>
+      <li><strong>ISO 15504 SPICE Nivel 3</strong> — Procesos de Software</li>
+    </ul>
+  </div>
+
+  <div class="job-entry" style="margin-top: 20px;">
+    <div class="job-title">Formación Académica</div>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="margin-bottom: 8px;"><strong>Técnico Superior en Desarrollo de Aplicaciones (FP II)</strong> — Salamanca</li>
+      <li style="margin-bottom: 8px;"><strong>Programador Especialista C#.NET</strong> — 425 horas</li>
+      <li>Formación Complementaria: UX para Devs, Arquitectura de Software, Gestión de Equipos</li>
+    </ul>
+  </div>
+</div>
+
+<!-- IDIOMAS -->
+<div class="section">
+  <h2>IDIOMAS</h2>
+  <ul style="list-style: none; padding-left: 0;">
+    <li style="margin-bottom: 8px;"><strong>Español:</strong> Nativo</li>
+    <li style="margin-bottom: 8px;"><strong>Inglés:</strong> Comprensión lectora avanzada (C1) · Expresión oral y escrita nivel medio (B1)</li>
+  </ul>
+</div>
+
+</body>
+</html>
