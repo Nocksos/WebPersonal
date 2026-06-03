@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Project } from '@/domain/types'
 
 const PROJECTS_DATA: Project[] = [
@@ -47,14 +47,16 @@ export const ProjectsCarousel: React.FC = () => {
   const totalCards = PROJECTS_DATA.length + 1 // +1 for the "Próximamente" card
   const maxIndex = Math.max(0, totalCards - visibleCount)
 
-  const updateDimensions = () => {
+  const updateDimensions = useCallback(() => {
+    let nextVisibleCount = 3
     if (window.innerWidth >= 1024) {
-      setVisibleCount(3)
+      nextVisibleCount = 3
     } else if (window.innerWidth >= 640) {
-      setVisibleCount(2)
+      nextVisibleCount = 2
     } else {
-      setVisibleCount(1)
+      nextVisibleCount = 1
     }
+    setVisibleCount(nextVisibleCount)
 
     if (trackRef.current) {
       const cardEl = trackRef.current.querySelector('.carousel-card')
@@ -62,7 +64,10 @@ export const ProjectsCarousel: React.FC = () => {
         setCardWidth(cardEl.getBoundingClientRect().width)
       }
     }
-  }
+
+    const nextMaxIndex = Math.max(0, totalCards - nextVisibleCount)
+    setCurrentIndex((prev) => Math.min(prev, nextMaxIndex))
+  }, [totalCards])
 
   useEffect(() => {
     updateDimensions()
@@ -74,12 +79,12 @@ export const ProjectsCarousel: React.FC = () => {
       clearTimeout(timer)
       window.removeEventListener('resize', updateDimensions)
     }
-  }, [])
+  }, [updateDimensions])
 
   // Recalculate card width whenever visibleCount or children render changes
   useEffect(() => {
     updateDimensions()
-  }, [visibleCount])
+  }, [visibleCount, updateDimensions])
 
   const handlePrev = () => {
     setCurrentIndex((prev) => Math.max(0, prev - 1))
