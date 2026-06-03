@@ -6,6 +6,20 @@ El proyecto está diseñado bajo un enfoque de **Diseño Guiado por el Dominio (
 
 ---
 
+## 🤖 Desarrollo 100% Guiado por IA (AI-Driven Development)
+
+Este proyecto representa un caso de estudio real de **ingeniería de software asistida y ejecutada al 100% de manera autónoma por Inteligencia Artificial (IA)**. Todo el ciclo de vida del desarrollo ha sido gestionado por un agente inteligente de IA en colaboración estrecha con el usuario:
+
+1. **Maquetación Inicial y Generación del HTML:** La estructura base y estilos originales ([portfolio.html](file:///c:/Proyectos/WebPersonal/src/portfolio.html)) fueron concebidos y maquetados inicialmente utilizando herramientas generativas de IA.
+2. **Planificación y Especificaciones de Negocio:** La IA analizó las necesidades de migración del portafolio hacia una arquitectura profesional, dividiendo los requerimientos en **13 Historias de Usuario (Specs)** y **más de 70 Tareas Técnicas (Tasks)** con su respectivo criterio de aceptación y definición de hecho (DoD).
+3. **Gestión Autónoma de Tareas en GitHub:** Mediante integraciones de API programáticas (usando Octokit y scripts locales), la IA registró cada tarea como un *Issue* en GitHub de manera automática, etiquetándolas según su ciclo de vida (`todo` ➔ `in-progress` ➔ `in-review` ➔ `done`).
+4. **Desarrollo y Commits Atómicos:** El código de la aplicación React se construyó de forma modular, tarea por tarea. Cada una de ellas se validó localmente (compilación, linting y pruebas unitarias) antes de realizar **commits atómicos e independientes** siguiendo la especificación de **Conventional Commits**, referenciando cada issue en el mensaje de commit para mantener trazabilidad absoluta.
+5. **Calidad y Despliegue Automatizados:** La IA diseñó y configuró la automatización de pre-commits mediante Git Hooks y el workflow de CI/CD para validar y desplegar la aplicación a producción sin intervención manual.
+
+Este enfoque reduce errores humanos de integración y asegura que cada línea de código tenga un propósito claro, documentado y asociado a una tarea planificada.
+
+---
+
 ## 🗺️ Estructura del Proyecto
 
 El repositorio está organizado de la siguiente manera:
