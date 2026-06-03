@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 
-export const CVDownload = () => {
+export const CVDownload: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 

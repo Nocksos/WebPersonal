@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export const ContactForm = () => {
+export const ContactForm: React.FC = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('alvarohernandezgil@gmail.com')
   const [subject, setSubject] = useState('')

@@ -3,7 +3,7 @@ interface MobileMenuProps {
   onClose: () => void
 }
 
-export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
+export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   return (
     <>
       {/* Overlay */}

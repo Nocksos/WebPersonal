@@ -7,12 +7,12 @@ interface ProgressBarProps {
   trackPercentageColorClass?: string
 }
 
-const ProgressBar = ({
+const ProgressBar: React.FC<ProgressBarProps> = ({
   label,
   percentage,
   colorClass,
   trackPercentageColorClass,
-}: ProgressBarProps) => {
+}) => {
   const [width, setWidth] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -58,7 +58,7 @@ const ProgressBar = ({
   )
 }
 
-export const TechStack = () => {
+export const TechStack: React.FC = () => {
   const CLOUD_BADGES = [
     'AZURE',
     'TERRAFORM',

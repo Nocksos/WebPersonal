@@ -1,14 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-
-interface Project {
-  id: string
-  number: string
-  title: string
-  description: string
-  tags: string[]
-  isCaseStudy: boolean
-  footerNote: string
-}
+import { Project } from '@/domain/types'
 
 const PROJECTS_DATA: Project[] = [
   {
@@ -18,6 +9,7 @@ const PROJECTS_DATA: Project[] = [
     description:
       'Plataforma inteligente de gestión documental impulsada por IA. Clasificación automática, extracción de metadatos y procesamiento de contenido con Azure AI Search y RAG.',
     tags: ['AZURE AI', 'C#', 'COSMOSDB'],
+    category: 'enterprise',
     isCaseStudy: true,
     footerNote: 'Proyecto empresarial · Sin código disponible',
   },
@@ -28,6 +20,7 @@ const PROJECTS_DATA: Project[] = [
     description:
       'API inteligente basada en IA (Azure AI Foundry) para procesamiento automático de comunicaciones marítimas. Extrae metadatos estructurados de documentos no estructurados en tiempo real. Infraestructura IaC con Terraform.',
     tags: ['AZURE AI', 'TERRAFORM', 'REST API'],
+    category: 'enterprise',
     isCaseStudy: true,
     footerNote: 'Proyecto empresarial · Sin código disponible',
   },
@@ -38,12 +31,13 @@ const PROJECTS_DATA: Project[] = [
     description:
       'Primer software en España en obtener ISO/IEC 25000 Nivel 5. Plataforma de auditoría, trazabilidad y certificación de procesos de calidad. Estándares: ISO 15504 SPICE Nivel 3, firmezas con Viafirma.',
     tags: ['.NET', 'ISO 25000 L5', 'VIAFIRMA'],
+    category: 'enterprise',
     isCaseStudy: true,
     footerNote: 'Proyecto empresarial · Sin código disponible',
   },
 ]
 
-export const ProjectsCarousel = () => {
+export const ProjectsCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [visibleCount, setVisibleCount] = useState(3)
   const [cardWidth, setCardWidth] = useState(0)

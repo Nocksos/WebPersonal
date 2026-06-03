@@ -4,7 +4,7 @@ interface HeaderProps {
   onMenuOpen: () => void
 }
 
-export const Header = ({ onMenuOpen }: HeaderProps) => {
+export const Header: React.FC<HeaderProps> = ({ onMenuOpen }) => {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {

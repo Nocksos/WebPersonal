@@ -6,7 +6,7 @@ interface StatCounterProps {
   suffix?: string
 }
 
-const StatCounter = ({ target, duration = 1500, suffix = '+' }: StatCounterProps) => {
+const StatCounter: React.FC<StatCounterProps> = ({ target, duration = 1500, suffix = '+' }) => {
   const [count, setCount] = useState(0)
   const [elementRef, setElementRef] = useState<HTMLDivElement | null>(null)
 
@@ -52,7 +52,7 @@ const StatCounter = ({ target, duration = 1500, suffix = '+' }: StatCounterProps
   )
 }
 
-export const Hero = () => {
+export const Hero: React.FC = () => {
   const handleDownloadClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const cvSection = document.querySelector('#cv')

@@ -19,6 +19,7 @@ export interface Skill {
 }
 
 export interface Experience {
+  id?: string
   company: string
   position: string
   dates: string
@@ -28,6 +29,7 @@ export interface Experience {
 }
 
 export interface Education {
+  id?: string
   degree: string
   institution: string
   dates: string

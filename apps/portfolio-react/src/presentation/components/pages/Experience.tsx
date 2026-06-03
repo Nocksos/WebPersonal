@@ -1,47 +1,29 @@
 import { useState } from 'react'
+import { Experience as DomainExperience, Education as DomainEducation } from '@/domain/types'
 
-interface WorkExperience {
-  id: string
-  title: string
-  company: string
-  dates: string
-  description: string
-  isCurrent?: boolean
-  tags?: string[]
-}
-
-interface Education {
-  id: string
-  title: string
-  institution: string
-  dates: string
-  description?: string
-  tags?: string[]
-}
-
-const WORK_DATA: WorkExperience[] = [
+const WORK_DATA: DomainExperience[] = [
   {
     id: 'encamina',
-    title: 'Cloud Solutions Developer / Team Leader',
+    position: 'Cloud Solutions Developer / Team Leader',
     company: 'ENCAMINA',
     dates: '2018 – Presente',
     isCurrent: true,
     description:
       'Lideré arquitectura de extremo a extremo de GADA-i: plataforma de gestión documental con IA en Azure. Implementé clasificación inteligente y RAG sobre AI Search, reduciendo tratamiento manual ~80%. API inteligente para documentación marítima (Bergé) con Azure AI Foundry + Terraform. Framework de observabilidad con Application Insights (reducción de tiempo detección incidentes ~60%).',
-    tags: ['AZURE AI', 'RAG', 'TERRAFORM', 'ISO 27001'],
+    technologies: ['AZURE AI', 'RAG', 'TERRAFORM', 'ISO 27001'],
   },
   {
     id: 'avantia',
-    title: 'Técnico SharePoint',
+    position: 'Técnico SharePoint',
     company: 'AVANTIA',
     dates: '2016 – 2018',
     description:
       'Plataforma integral de gestión de documentación jurídica sobre SharePoint Online con Angular JS y SPFX. Implementé flujos documentales estructurados, control de acceso granular y seguimiento de expedientes. Integración con sistemas Infolex.',
-    tags: ['SHAREPOINT ONLINE', 'ANGULAR JS', 'SPFX'],
+    technologies: ['SHAREPOINT ONLINE', 'ANGULAR JS', 'SPFX'],
   },
   {
     id: 'bitware',
-    title: 'Desarrollador y Analista Senior',
+    position: 'Desarrollador y Analista Senior',
     company: 'BITWARE S.L.',
     dates: '2008 – 2016',
     description:
@@ -49,10 +31,10 @@ const WORK_DATA: WorkExperience[] = [
   },
 ]
 
-const EDUCATION_DATA: Education[] = [
+const EDUCATION_DATA: DomainEducation[] = [
   {
     id: 'fp',
-    title: 'Técnico Superior en Desarrollo de Aplicaciones (FP II)',
+    degree: 'Técnico Superior en Desarrollo de Aplicaciones (FP II)',
     institution: 'Salamanca · Formación Profesional',
     dates: 'Formación Profesional',
     description:
@@ -60,14 +42,14 @@ const EDUCATION_DATA: Education[] = [
   },
   {
     id: 'certs',
-    title: 'Certificaciones Profesionales',
+    degree: 'Certificaciones Profesionales',
     institution: 'Scrum / Cloud / Seguridad',
     dates: 'Varios',
     tags: ['AZ-900 AZURE', 'SCRUM MASTER', 'ISO 27001', 'ISO 25000', 'ISO 15504 SPICE'],
   },
 ]
 
-export const Experience = () => {
+export const Experience: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'work' | 'edu'>('work')
 
   const opacities = ['opacity-100', 'opacity-60', 'opacity-40']
@@ -131,7 +113,7 @@ export const Experience = () => {
                     <div className={!isLast ? 'pb-8' : ''}>
                       <div className="flex flex-wrap items-center gap-3 mb-1">
                         <h3 className="font-grotesk font-semibold text-lg text-on-surface">
-                          {item.title}
+                          {item.position}
                         </h3>
                         {item.isCurrent && (
                           <span className="font-mono text-[10px] text-primary bg-primary/10 border border-primary/20 px-2 py-0.5">
@@ -145,9 +127,9 @@ export const Experience = () => {
                       <p className="font-geist text-sm text-on-surface-variant leading-relaxed">
                         {item.description}
                       </p>
-                      {item.tags && (
+                      {item.technologies && (
                         <div className="flex flex-wrap gap-2 mt-3">
-                          {item.tags.map((tag) => (
+                          {item.technologies.map((tag) => (
                             <span
                               key={tag}
                               className="skill-badge bg-primary/10 text-primary border-primary/20"
@@ -178,7 +160,7 @@ export const Experience = () => {
                     </div>
                     <div className={!isLast ? 'pb-8' : ''}>
                       <h3 className="font-grotesk font-semibold text-lg text-on-surface mb-1">
-                        {item.title}
+                        {item.degree}
                       </h3>
                       <div className="font-mono text-xs text-on-surface-variant mb-3">
                         {item.institution}
