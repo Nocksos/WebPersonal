@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Header from './presentation/components/layout/Header'
 import MobileMenu from './presentation/components/layout/MobileMenu'
 import Hero from './presentation/components/pages/Hero'
+import ProjectsCarousel from './presentation/components/common/ProjectsCarousel'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -13,6 +14,7 @@ function App() {
 
       <main>
         <Hero />
+        <ProjectsCarousel />
       </main>
     </div>
   )
