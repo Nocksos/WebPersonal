@@ -1,11 +1,40 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-content: [
-'./index.html',
-'./src/**/*.{js,ts,jsx,tsx}',
-],
-theme: {
-extend: {},
-},
-plugins: [],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        surface: '#0b1326',
+        'surface-dim': '#0b1326',
+        'surface-bright': '#31394d',
+        'surface-container-lowest': '#060e20',
+        'surface-container-low': '#131b2e',
+        'surface-container': '#171f33',
+        'surface-container-high': '#222a3d',
+        'surface-container-highest': '#2d3449',
+        'on-surface': '#dae2fd',
+        'on-surface-variant': '#bcc9cd',
+        outline: '#869397',
+        'outline-variant': '#3d494c',
+        primary: '#4cd7f6',
+        'on-primary': '#003640',
+        'primary-container': '#06b6d4',
+        secondary: '#94de2d',
+        'on-secondary': '#1f3700',
+        'secondary-container': '#7ac100',
+        tertiary: '#c0c1ff',
+        background: '#0b1326',
+        'on-background': '#dae2fd',
+        'surface-variant': '#2d3449',
+        'primary-fixed-dim': '#4cd7f6',
+        error: '#ffb4ab',
+      },
+      fontFamily: {
+        grotesk: ['Space Grotesk', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        geist: ['Geist', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [],
 }
