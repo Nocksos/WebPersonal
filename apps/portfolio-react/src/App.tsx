@@ -8,6 +8,7 @@ import TechStack from './presentation/components/pages/TechStack'
 import Experience from './presentation/components/pages/Experience'
 import CVDownload from './presentation/components/pages/CVDownload'
 import ContactForm from './presentation/components/common/ContactForm'
+import Footer from './presentation/components/layout/Footer'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -26,6 +27,8 @@ function App() {
         <CVDownload />
         <ContactForm />
       </main>
+
+      <Footer />
     </div>
   )
 }
