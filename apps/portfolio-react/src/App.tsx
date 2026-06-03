@@ -6,6 +6,7 @@ import ProjectsCarousel from './presentation/components/common/ProjectsCarousel'
 import About from './presentation/components/pages/About'
 import TechStack from './presentation/components/pages/TechStack'
 import Experience from './presentation/components/pages/Experience'
+import CVDownload from './presentation/components/pages/CVDownload'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -21,6 +22,7 @@ function App() {
         <About />
         <TechStack />
         <Experience />
+        <CVDownload />
       </main>
     </div>
   )
