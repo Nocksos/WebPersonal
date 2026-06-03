@@ -1,30 +1,45 @@
 import { useState } from 'react'
+import { ContactService, contactFormSchema } from '@/infrastructure/services/ContactService'
 
 export const ContactForm: React.FC = () => {
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('alvarohernandezgil@gmail.com')
+  const [email, setEmail] = useState('')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [errors, setErrors] = useState<{ [key: string]: string }>({})
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!name || !email || !subject || !message) {
+    setErrors({})
+
+    const formData = { name, email, subject, message }
+    const result = contactFormSchema.safeParse(formData)
+
+    if (!result.success) {
+      const fieldErrors: { [key: string]: string } = {}
+      result.error.issues.forEach((issue) => {
+        if (issue.path[0]) {
+          fieldErrors[issue.path[0].toString()] = issue.message
+        }
+      })
+      setErrors(fieldErrors)
       return
     }
 
     setStatus('loading')
-
-    // Simulate API request
-    setTimeout(() => {
+    try {
+      await ContactService.sendForm(formData)
       setStatus('success')
       setName('')
+      setEmail('')
       setSubject('')
       setMessage('')
-
-      // Reset to idle status after 3 seconds
       setTimeout(() => setStatus('idle'), 3000)
-    }, 1500)
+    } catch (error) {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 3000)
+    }
   }
 
   return (
@@ -122,6 +137,11 @@ export const ContactForm: React.FC = () => {
                   className="form-input"
                   placeholder="Tu nombre"
                 />
+                {errors.name && (
+                  <span className="text-red-400 text-[10px] font-mono mt-1 block">
+                    {errors.name}
+                  </span>
+                )}
               </div>
               <div>
                 <label className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">
@@ -135,6 +155,11 @@ export const ContactForm: React.FC = () => {
                   className="form-input"
                   placeholder="tu@email.com"
                 />
+                {errors.email && (
+                  <span className="text-red-400 text-[10px] font-mono mt-1 block">
+                    {errors.email}
+                  </span>
+                )}
               </div>
             </div>
             <div className="mb-6">
@@ -149,6 +174,11 @@ export const ContactForm: React.FC = () => {
                 className="form-input"
                 placeholder="¿De qué quieres hablar?"
               />
+              {errors.subject && (
+                <span className="text-red-400 text-[10px] font-mono mt-1 block">
+                  {errors.subject}
+                </span>
+              )}
             </div>
             <div className="mb-8">
               <label className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">
@@ -162,6 +192,11 @@ export const ContactForm: React.FC = () => {
                 className="form-input resize-none"
                 placeholder="Tu mensaje aquí..."
               />
+              {errors.message && (
+                <span className="text-red-400 text-[10px] font-mono mt-1 block">
+                  {errors.message}
+                </span>
+              )}
             </div>
             <button
               type="submit"
