@@ -1,5 +1,6 @@
 import { useAppSelector, useAppDispatch } from '@/store/hooks'
 import { setMobileMenuOpen } from '@/store/slices/uiSlice'
+import { DownloadService } from '@/infrastructure/services/DownloadService'
 
 export const MobileMenu: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -88,7 +89,11 @@ export const MobileMenu: React.FC = () => {
         <a
           id="resume-btn-mobile"
           href="#"
-          onClick={onClose}
+          onClick={(e) => {
+            e.preventDefault()
+            onClose()
+            DownloadService.downloadPDF()
+          }}
           className="mt-auto grad-btn text-center text-on-primary py-3 font-mono text-xs font-bold rounded-sm hover:brightness-110 transition-all"
         >
           RESUME.PDF

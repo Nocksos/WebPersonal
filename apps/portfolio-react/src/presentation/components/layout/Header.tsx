@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAppDispatch } from '@/store/hooks'
 import { setMobileMenuOpen } from '@/store/slices/uiSlice'
+import { DownloadService } from '@/infrastructure/services/DownloadService'
 
 export const Header: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -66,6 +67,10 @@ export const Header: React.FC = () => {
           <a
             id="resume-btn-desktop"
             href="#"
+            onClick={(e) => {
+              e.preventDefault()
+              DownloadService.downloadPDF()
+            }}
             className="hidden md:inline-flex grad-btn text-on-primary px-5 py-2 font-mono text-xs font-bold rounded-sm glow-btn hover:brightness-110 transition-all"
           >
             RESUME.PDF

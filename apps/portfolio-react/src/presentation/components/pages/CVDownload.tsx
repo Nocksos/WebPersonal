@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { DownloadService } from '@/infrastructure/services/DownloadService'
 
 export const CVDownload: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,17 +17,11 @@ export const CVDownload: React.FC = () => {
 
   const handleDownload = (format: 'pdf' | 'html' | 'open-html') => {
     if (format === 'pdf') {
-      const link = document.createElement('a')
-      link.href = '/Alvaro_Hernandez_Gil_CV_ES.pdf'
-      link.download = 'Alvaro_Hernandez_Gil_CV_ES.pdf'
-      link.click()
+      DownloadService.downloadPDF()
     } else if (format === 'html') {
-      const link = document.createElement('a')
-      link.href = '/cv-alvaro-hernandez.html'
-      link.download = 'cv-alvaro-hernandez.html'
-      link.click()
+      DownloadService.downloadHTML()
     } else if (format === 'open-html') {
-      window.open('/cv-alvaro-hernandez.html', '_blank')
+      DownloadService.openHTML()
     }
     setIsOpen(false)
   }
