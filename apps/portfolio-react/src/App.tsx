@@ -5,6 +5,7 @@ import Hero from './presentation/components/pages/Hero'
 import ProjectsCarousel from './presentation/components/common/ProjectsCarousel'
 import About from './presentation/components/pages/About'
 import TechStack from './presentation/components/pages/TechStack'
+import Experience from './presentation/components/pages/Experience'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -19,6 +20,7 @@ function App() {
         <ProjectsCarousel />
         <About />
         <TechStack />
+        <Experience />
       </main>
     </div>
   )
