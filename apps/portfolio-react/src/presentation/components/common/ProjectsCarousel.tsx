@@ -128,7 +128,7 @@ export const ProjectsCarousel: React.FC = () => {
             <button
               onClick={handlePrev}
               disabled={currentIndex === 0}
-              className={`w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center transition-all ${
+              className={`w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-primary focus:outline-none ${
                 currentIndex === 0
                   ? 'opacity-40 cursor-not-allowed'
                   : 'text-on-surface-variant hover:border-primary hover:text-primary'
@@ -142,6 +142,7 @@ export const ProjectsCarousel: React.FC = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
+                aria-hidden="true"
               >
                 <path d="M15 18l-6-6 6-6" />
               </svg>
@@ -149,7 +150,7 @@ export const ProjectsCarousel: React.FC = () => {
             <button
               onClick={handleNext}
               disabled={currentIndex === maxIndex}
-              className={`w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center transition-all ${
+              className={`w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-primary focus:outline-none ${
                 currentIndex === maxIndex
                   ? 'opacity-40 cursor-not-allowed'
                   : 'text-on-surface-variant hover:border-primary hover:text-primary'
@@ -163,6 +164,7 @@ export const ProjectsCarousel: React.FC = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
+                aria-hidden="true"
               >
                 <path d="M9 18l6-6-6-6" />
               </svg>
@@ -234,6 +236,7 @@ export const ProjectsCarousel: React.FC = () => {
                     stroke="currentColor"
                     strokeWidth="1.5"
                     className="text-on-surface-variant"
+                    aria-hidden="true"
                   >
                     <line x1="12" y1="5" x2="12" y2="19" />
                     <line x1="5" y1="12" x2="19" y2="12" />
@@ -256,7 +259,7 @@ export const ProjectsCarousel: React.FC = () => {
             <button
               key={i}
               onClick={() => handleGoTo(i)}
-              className={`w-1.5 h-1.5 rounded-full transition-all ${
+              className={`w-1.5 h-1.5 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-primary focus:outline-none ${
                 i === currentIndex ? 'bg-primary w-4' : 'bg-outline-variant'
               }`}
               aria-label={`Ir a slide ${i + 1}`}
@@ -269,7 +272,7 @@ export const ProjectsCarousel: React.FC = () => {
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
-            className={`w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center transition-all ${
+            className={`w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-primary focus:outline-none ${
               currentIndex === 0 ? 'opacity-40' : 'text-on-surface-variant active:text-primary'
             }`}
             aria-label="Anterior"
@@ -281,6 +284,7 @@ export const ProjectsCarousel: React.FC = () => {
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
+              aria-hidden="true"
             >
               <path d="M15 18l-6-6 6-6" />
             </svg>
@@ -288,7 +292,7 @@ export const ProjectsCarousel: React.FC = () => {
           <button
             onClick={handleNext}
             disabled={currentIndex === maxIndex}
-            className={`w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center transition-all ${
+            className={`w-10 h-10 border border-outline-variant rounded-sm flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-primary focus:outline-none ${
               currentIndex === maxIndex
                 ? 'opacity-40'
                 : 'text-on-surface-variant active:text-primary'
@@ -302,6 +306,7 @@ export const ProjectsCarousel: React.FC = () => {
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
+              aria-hidden="true"
             >
               <path d="M9 18l6-6-6-6" />
             </svg>

@@ -75,10 +75,18 @@ export const Experience: React.FC = () => {
         {/* Timeline Column */}
         <div className="lg:col-span-8">
           {/* Tabs Selector */}
-          <div className="flex gap-1 mb-8 border-b border-outline-variant">
+          <div
+            role="tablist"
+            aria-label="Selección de trayectoria"
+            className="flex gap-1 mb-8 border-b border-outline-variant"
+          >
             <button
+              role="tab"
+              id="work-tab"
+              aria-selected={activeTab === 'work'}
+              aria-controls="work-panel"
               onClick={() => setActiveTab('work')}
-              className={`font-mono text-xs px-4 py-3 border-b-2 transition-colors ${
+              className={`font-mono text-xs px-4 py-3 border-b-2 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus:outline-none rounded-sm ${
                 activeTab === 'work'
                   ? 'text-primary border-primary'
                   : 'text-on-surface-variant border-transparent hover:text-primary'
@@ -87,8 +95,12 @@ export const Experience: React.FC = () => {
               TRABAJO
             </button>
             <button
+              role="tab"
+              id="edu-tab"
+              aria-selected={activeTab === 'edu'}
+              aria-controls="edu-panel"
               onClick={() => setActiveTab('edu')}
-              className={`font-mono text-xs px-4 py-3 border-b-2 transition-colors ${
+              className={`font-mono text-xs px-4 py-3 border-b-2 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus:outline-none rounded-sm ${
                 activeTab === 'edu'
                   ? 'text-primary border-primary'
                   : 'text-on-surface-variant border-transparent hover:text-primary'
@@ -100,7 +112,7 @@ export const Experience: React.FC = () => {
 
           {/* Work Timeline */}
           {activeTab === 'work' && (
-            <div className="space-y-8">
+            <div id="work-panel" role="tabpanel" aria-labelledby="work-tab" className="space-y-8">
               {WORK_DATA.map((item, index) => {
                 const opacityClass = opacities[index] || 'opacity-40'
                 const isLast = index === WORK_DATA.length - 1
@@ -148,7 +160,7 @@ export const Experience: React.FC = () => {
 
           {/* Education Timeline */}
           {activeTab === 'edu' && (
-            <div className="space-y-8">
+            <div id="edu-panel" role="tabpanel" aria-labelledby="edu-tab" className="space-y-8">
               {EDUCATION_DATA.map((item, index) => {
                 const opacityClass = opacities[index] || 'opacity-40'
                 const isLast = index === EDUCATION_DATA.length - 1

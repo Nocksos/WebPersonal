@@ -104,7 +104,7 @@ export const Hero: React.FC = () => {
               id="hero-download-btn"
               href="#cv"
               onClick={handleDownloadClick}
-              className="grad-btn text-on-primary px-7 py-3.5 font-mono text-xs font-bold rounded-sm flex items-center gap-2 glow-btn hover:brightness-110 transition-all"
+              className="grad-btn text-on-primary px-7 py-3.5 font-mono text-xs font-bold rounded-sm flex items-center gap-2 glow-btn hover:brightness-110 focus-visible:ring-2 focus-visible:ring-primary focus:outline-none transition-all"
             >
               DESCARGAR_CV
               <svg
@@ -114,6 +114,7 @@ export const Hero: React.FC = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
+                aria-hidden="true"
               >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
@@ -122,7 +123,7 @@ export const Hero: React.FC = () => {
             </a>
             <a
               href="#contact"
-              className="border border-primary text-primary px-7 py-3.5 font-mono text-xs font-bold rounded-sm hover:bg-primary/8 transition-all"
+              className="border border-primary text-primary px-7 py-3.5 font-mono text-xs font-bold rounded-sm hover:bg-primary/8 focus-visible:ring-2 focus-visible:ring-primary focus:outline-none transition-all"
             >
               CONTACTAR
             </a>

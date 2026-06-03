@@ -61,7 +61,7 @@ export const ContactForm: React.FC = () => {
           <div className="space-y-4">
             <a
               href="mailto:alvarohernandezgil@gmail.com"
-              className="flex items-center gap-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors group"
+              className="flex items-center gap-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-primary focus:outline-none rounded-sm px-1 group"
             >
               <svg
                 width="16"
@@ -71,6 +71,7 @@ export const ContactForm: React.FC = () => {
                 stroke="currentColor"
                 strokeWidth="1.5"
                 className="text-primary"
+                aria-hidden="true"
               >
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22,6 12,13 2,6" />
@@ -81,7 +82,7 @@ export const ContactForm: React.FC = () => {
               href="https://www.linkedin.com/in/alvarohernandezgil/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors group"
+              className="flex items-center gap-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-primary focus:outline-none rounded-sm px-1 group"
             >
               <svg
                 width="16"
@@ -91,6 +92,7 @@ export const ContactForm: React.FC = () => {
                 stroke="currentColor"
                 strokeWidth="1.5"
                 className="text-primary"
+                aria-hidden="true"
               >
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
                 <rect x="2" y="9" width="4" height="12" />
@@ -102,7 +104,7 @@ export const ContactForm: React.FC = () => {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors group"
+              className="flex items-center gap-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-primary focus:outline-none rounded-sm px-1 group"
             >
               <svg
                 width="16"
@@ -110,6 +112,7 @@ export const ContactForm: React.FC = () => {
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 className="text-primary"
+                aria-hidden="true"
               >
                 <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
               </svg>
@@ -126,74 +129,90 @@ export const ContactForm: React.FC = () => {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
               <div>
-                <label className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">
+                <label
+                  htmlFor="name-input"
+                  className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2"
+                >
                   NOMBRE
                 </label>
                 <input
                   type="text"
+                  id="name-input"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="form-input"
+                  className="form-input focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   placeholder="Tu nombre"
                 />
                 {errors.name && (
-                  <span className="text-red-400 text-[10px] font-mono mt-1 block">
+                  <span className="text-red-400 text-[10px] font-mono mt-1 block" role="alert">
                     {errors.name}
                   </span>
                 )}
               </div>
               <div>
-                <label className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">
+                <label
+                  htmlFor="email-input"
+                  className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2"
+                >
                   EMAIL
                 </label>
                 <input
                   type="email"
+                  id="email-input"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="form-input"
+                  className="form-input focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   placeholder="tu@email.com"
                 />
                 {errors.email && (
-                  <span className="text-red-400 text-[10px] font-mono mt-1 block">
+                  <span className="text-red-400 text-[10px] font-mono mt-1 block" role="alert">
                     {errors.email}
                   </span>
                 )}
               </div>
             </div>
             <div className="mb-6">
-              <label className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">
+              <label
+                htmlFor="subject-input"
+                className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2"
+              >
                 ASUNTO
               </label>
               <input
                 type="text"
+                id="subject-input"
                 required
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                className="form-input"
+                className="form-input focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 placeholder="¿De qué quieres hablar?"
               />
               {errors.subject && (
-                <span className="text-red-400 text-[10px] font-mono mt-1 block">
+                <span className="text-red-400 text-[10px] font-mono mt-1 block" role="alert">
                   {errors.subject}
                 </span>
               )}
             </div>
             <div className="mb-8">
-              <label className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2">
+              <label
+                htmlFor="message-input"
+                className="font-mono text-[10px] text-on-surface-variant tracking-widest block mb-2"
+              >
                 MENSAJE
               </label>
               <textarea
                 rows={4}
+                id="message-input"
                 required
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="form-input resize-none"
+                className="form-input resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 placeholder="Tu mensaje aquí..."
               />
               {errors.message && (
-                <span className="text-red-400 text-[10px] font-mono mt-1 block">
+                <span className="text-red-400 text-[10px] font-mono mt-1 block" role="alert">
                   {errors.message}
                 </span>
               )}
@@ -201,13 +220,14 @@ export const ContactForm: React.FC = () => {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full grad-btn text-on-primary py-3.5 font-mono text-xs font-bold rounded-sm glow-btn hover:brightness-110 transition-all flex items-center justify-center gap-2"
+              className="w-full grad-btn text-on-primary py-3.5 font-mono text-xs font-bold rounded-sm glow-btn hover:brightness-110 focus-visible:ring-2 focus-visible:ring-primary focus:outline-none transition-all flex items-center justify-center gap-2"
             >
               {status === 'loading' && (
                 <svg
                   className="animate-spin h-4 w-4 text-on-primary"
                   fill="none"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <circle
                     className="opacity-25"

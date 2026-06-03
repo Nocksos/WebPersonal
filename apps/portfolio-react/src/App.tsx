@@ -13,12 +13,15 @@ const SectionSpinner: React.FC = () => (
   <div
     className="flex justify-center items-center py-20 min-h-[200px]"
     data-testid="section-spinner"
+    role="status"
+    aria-label="Cargando sección"
   >
     <svg
       className="animate-spin h-8 w-8 text-primary"
       fill="none"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
       <path

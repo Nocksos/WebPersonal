@@ -11,8 +11,17 @@ export const CVDownload: React.FC = () => {
         setIsOpen(false)
       }
     }
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false)
+      }
+    }
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [])
 
   const handleDownload = (format: 'pdf' | 'html' | 'open-html') => {
@@ -53,6 +62,7 @@ export const CVDownload: React.FC = () => {
                   fill="none"
                   stroke="#4cd7f6"
                   strokeWidth="2"
+                  aria-hidden="true"
                 >
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                   <polyline points="14 2 14 8 20 8" />
@@ -79,6 +89,7 @@ export const CVDownload: React.FC = () => {
                   fill="none"
                   stroke="#94de2d"
                   strokeWidth="2"
+                  aria-hidden="true"
                 >
                   <path d="M9 11l3 3L22 4" />
                   <path d="M20 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h11" />
@@ -99,7 +110,9 @@ export const CVDownload: React.FC = () => {
             <div className="relative inline-block" ref={dropdownRef}>
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="grad-btn text-on-primary px-5 py-3 font-mono text-sm font-bold rounded-sm flex items-center gap-2 glow-btn hover:brightness-110 transition-all"
+                aria-haspopup="true"
+                aria-expanded={isOpen}
+                className="grad-btn text-on-primary px-5 py-3 font-mono text-sm font-bold rounded-sm flex items-center gap-2 glow-btn hover:brightness-110 focus-visible:ring-2 focus-visible:ring-primary focus:outline-none transition-all"
               >
                 DESCARGAR CV
                 <svg
@@ -109,28 +122,35 @@ export const CVDownload: React.FC = () => {
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
+                  aria-hidden="true"
                 >
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </button>
 
               {isOpen && (
-                <div className="absolute left-0 mt-2 w-44 bg-surface-container rounded-sm border border-outline-variant p-2 shadow-lg z-10">
+                <div
+                  role="menu"
+                  className="absolute left-0 mt-2 w-44 bg-surface-container rounded-sm border border-outline-variant p-2 shadow-lg z-10"
+                >
                   <button
+                    role="menuitem"
                     onClick={() => handleDownload('pdf')}
-                    className="w-full text-left px-3 py-2 font-mono text-xs text-on-surface hover:bg-surface/20 rounded-sm transition-colors"
+                    className="w-full text-left px-3 py-2 font-mono text-xs text-on-surface hover:bg-surface/20 focus-visible:bg-surface/20 focus:outline-none rounded-sm transition-colors"
                   >
                     Descargar PDF
                   </button>
                   <button
+                    role="menuitem"
                     onClick={() => handleDownload('html')}
-                    className="w-full text-left px-3 py-2 font-mono text-xs text-on-surface hover:bg-surface/20 rounded-sm transition-colors"
+                    className="w-full text-left px-3 py-2 font-mono text-xs text-on-surface hover:bg-surface/20 focus-visible:bg-surface/20 focus:outline-none rounded-sm transition-colors"
                   >
                     Descargar HTML
                   </button>
                   <button
+                    role="menuitem"
                     onClick={() => handleDownload('open-html')}
-                    className="w-full text-left px-3 py-2 font-mono text-xs text-on-surface hover:bg-surface/20 rounded-sm transition-colors"
+                    className="w-full text-left px-3 py-2 font-mono text-xs text-on-surface hover:bg-surface/20 focus-visible:bg-surface/20 focus:outline-none rounded-sm transition-colors"
                   >
                     Abrir HTML
                   </button>

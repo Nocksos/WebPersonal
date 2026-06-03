@@ -45,7 +45,14 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           {percentage}%
         </span>
       </div>
-      <div className="progress-bar">
+      <div
+        className="progress-bar"
+        role="progressbar"
+        aria-valuenow={percentage}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={label}
+      >
         <div
           className="progress-fill"
           style={{
@@ -96,6 +103,7 @@ export const TechStack: React.FC = () => {
                   fill="none"
                   stroke="#4cd7f6"
                   strokeWidth="1.5"
+                  aria-hidden="true"
                 >
                   <rect x="3" y="3" width="18" height="18" rx="2" />
                   <path d="M3 9h18" />
@@ -124,6 +132,7 @@ export const TechStack: React.FC = () => {
                   fill="none"
                   stroke="#94de2d"
                   strokeWidth="1.5"
+                  aria-hidden="true"
                 >
                   <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25" />
                   <line x1="8" y1="16" x2="8.01" y2="16" />
@@ -177,6 +186,7 @@ export const TechStack: React.FC = () => {
                   fill="none"
                   stroke="#c0c1ff"
                   strokeWidth="1.5"
+                  aria-hidden="true"
                 >
                   <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                 </svg>
