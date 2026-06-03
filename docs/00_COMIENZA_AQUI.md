@@ -1,353 +1,128 @@
-# 🎉 RESUMEN FINAL - Plan Completo Entregado
+# 🚀 GUÍA DE BIENVENIDA Y ONBOARDING — WebPersonal
 
-**Fecha:** Mayo 2026  
-**Estado:** ✅ Plan Completado y Listo para Desarrollo
-
----
-
-## 📦 ¿Qué Hemos Entregado?
-
-### 📚 Documentación Profesional (10 Archivos)
-
-Tu proyecto ahora tiene documentación **nivel producción** en `/docs`:
-
-```
-✅ INDEX.md                      → Tabla de contenidos (comienza aquí)
-✅ INICIO_RAPIDO.md             → 5 pasos para empezar (30 minutos)
-✅ RESUMEN_EJECUTIVO.md         → Visión general + timeline
-✅ DEVELOPMENT.md               → Setup completo + convenciones
-✅ MODULARIZATION.md            → Arquitectura DDD explicada
-✅ USER_STORIES.md              → 13 historias con Definition of Done
-✅ TASKS.md                     → 73 tareas desglosadas
-✅ GITHUB_SETUP.md              → Guía para repositorio
-✅ GITHUB_ISSUE_TEMPLATES.md    → Plantillas de Issues
-✅ BIRDS_EYE_VIEW.md            → Visión general visual
-```
+¡Bienvenido al proyecto de migración y rediseño de **WebPersonal**! Este documento tiene todo lo necesario para que un nuevo desarrollador se incorpore al proyecto y empiece a programar en cuestión de minutos.
 
 ---
 
-## 🎯 ¿Qué Construirás?
+## 🗺️ Mapa de Documentación
+El proyecto cuenta con los siguientes documentos técnicos clave en la carpeta `docs/`:
 
-### 13 Historias de Usuario
-
-| # | Historia | Prioridad | Tareas |
-|---|----------|-----------|--------|
-| 1 | Setup React + TypeScript | 🔴 Alta | 7 |
-| 2 | Sistema de Diseño | 🔴 Alta | 7 |
-| 3 | Sección Hero | 🔴 Alta | 7 |
-| 4 | Proyectos Carrusel | 🔴 Alta | 7 |
-| 5 | Stack Técnico | 🟡 Media | 5 |
-| 6 | Experiencia Timeline | 🟡 Media | 5 |
-| 7 | Contacto Formulario | 🟡 Media | 5 |
-| 8 | Descargas CV | 🟡 Media | 4 |
-| 9 | NavBar + Router | 🔴 Alta | 6 |
-| 10 | Footer + SEO | 🟡 Media | 5 |
-| 11 | Testing | 🟡 Media | 5 |
-| 12 | Backend Ready | 🟡 Media | 5 |
-| 13 | CI/CD Deploy | 🔴 Alta | 5 |
-
-**Total: 73 Tareas | ~32 horas | 6 Fases**
+* **[00_COMIENZA_AQUI.md](file:///c:/Proyectos/WebPersonal/docs/00_COMIENZA_AQUI.md)**: Este documento (Guía de Onboarding).
+* **[MIGRATION_BACKLOG_SPECS.md](file:///c:/Proyectos/WebPersonal/docs/MIGRATION_BACKLOG_SPECS.md)**: Especificaciones de diseño, variables de Tailwind CSS y comportamiento funcional para cada componente de la migración.
+* **[MIGRATION_COMMANDS.md](file:///c:/Proyectos/WebPersonal/docs/MIGRATION_COMMANDS.md)**: Lista secuencial de comandos para automatizar el ciclo de desarrollo en local y su sincronización en GitHub.
+* **[SPEC.md](file:///c:/Proyectos/WebPersonal/docs/SPEC.md)**: Especificación funcional detallada del portafolio original (útil como referencia de comportamiento).
+* **[COMPONENTS.md](file:///c:/Proyectos/WebPersonal/docs/COMPONENTS.md)**: Inventario de clases Tailwind CSS, marcado HTML y estilos para los componentes (como botones, carruseles, terminales, etc.).
+* **[MODULARIZATION.md](file:///c:/Proyectos/WebPersonal/docs/MODULARIZATION.md)**: Explicación a fondo de la arquitectura DDD (Domain-Driven Design).
+* **[DEVELOPMENT.md](file:///c:/Proyectos/WebPersonal/docs/DEVELOPMENT.md)**: Guía práctica de convenciones de código, nombrado de archivos, TypeScript y tests (Vitest).
 
 ---
 
-## 🏗️ Arquitectura Moderna
+## 🏗️ Arquitectura del Proyecto
 
-```
-React 18+ | TypeScript 5+ | Vite | Tailwind CSS
-├── Domain-Driven Design (DDD)
-├── Componentes reutilizables
-├── >70% test coverage (Vitest + RTL)
-├── ESLint + Prettier automático
-├── GitHub Actions CI/CD
-└── Listo para APIs backend (futuro)
-```
+El portafolio se está migrando de archivos estáticos HTML/JS a una aplicación moderna en **React + TypeScript + Tailwind CSS** dentro del subdirectorio:
+📂 `apps/portfolio-react`
 
----
+### Estructura de Capas (Domain-Driven Design)
+Seguimos el patrón de diseño guiado por el dominio (DDD) estructurado en `apps/portfolio-react/src`:
 
-## 📍 Ubicación de Todo
+1. **`domain/` (Dominio):** Contiene las entidades puras de negocio e interfaces (ej. `Project`, `Experience`). No depende de ningún framework ni librería externa.
+2. **`application/` (Aplicación):** Casos de uso de la aplicación (ej. descarga del CV, validación del formulario). Orquesta la interacción entre el dominio y los servicios externos.
+3. **`infrastructure/` (Infraestructura):** Detalles técnicos como configuración, clientes API (Axios), logs o mocks de datos para desarrollo.
+4. **`presentation/` (Presentación):** Componentes visuales de React, estilos globales, hooks y páginas. Es donde se construye la interfaz de usuario.
+5. **`shared/` (Compartido):** Constantes y utilidades auxiliares genéricas libres de lógica de negocio (formateadores, validadores genéricos, etc.).
 
-```
-c:\Proyectos\WebPersonal\
-└── docs/                                    ← TODO ESTÁ AQUÍ
-    ├── INDEX.md                           ← 👈 COMIENZA POR AQUÍ
-    ├── INICIO_RAPIDO.md                   ← 5 pasos (30 min)
-    ├── RESUMEN_EJECUTIVO.md               ← Resumen ejecutivo
-    ├── DEVELOPMENT.md                     ← Setup + convenciones
-    ├── MODULARIZATION.md                  ← Arquitectura
-    ├── USER_STORIES.md                    ← 13 historias
-    ├── TASKS.md                           ← 73 tareas
-    ├── GITHUB_SETUP.md                    ← GitHub guide
-    ├── GITHUB_ISSUE_TEMPLATES.md          ← Plantillas
-    ├── BIRDS_EYE_VIEW.md                  ← Visión visual
-    └── (archivos existentes)
-```
+> [!IMPORTANT]
+> **Regla de Dependencia Dorada:** Las dependencias solo fluyen hacia adentro. La capa `domain` nunca debe conocer ni depender de componentes de React, configuraciones de API o bases de datos.
+
+### Gestión de Estado
+* Usamos **Redux Toolkit** para gestionar el estado global de la interfaz de usuario (como la visibilidad del menú móvil o la sección activa del viewport).
 
 ---
 
-## 🚀 Próximos Pasos: 5 MINUTOS
+## 🐙 Control de Versiones (Git)
 
-### 1. Abre este archivo en VS Code
-```
-c:\Proyectos\WebPersonal\docs\INDEX.md
+### 🌿 Estrategia de Ramas
+* **Rama principal:** `main` (código estable, listo para despliegue).
+* **Ramas de feature:** Se crean a partir de `main` con la siguiente nomenclatura:
+  * `feature/us-XXX` (para una historia de usuario completa).
+  * `feature/task-XXX` (donde `XXX` es el número del issue de GitHub).
+
+### ✍️ Convención de Commits
+Para mantener el historial limpio, seguimos **Conventional Commits**:
+* `feat(componente):` Nueva funcionalidad (ej. `feat(hero): add typing effect to terminal`).
+* `fix(componente):` Corrección de un error (ej. `fix(header): resolve overlapping logo on mobile`).
+* `docs:` Cambios en la documentación (ej. `docs: update onboarding steps`).
+* `style:` Cambios puramente estéticos o de formateo sin impacto funcional.
+* `test:` Añadir o modificar tests unitarios.
+
+---
+
+## 📋 Gestión de Tareas (Workflow de GitHub)
+
+El progreso del proyecto se sincroniza con el tablero Kanban de GitHub mediante un script automatizado local (`move-task.js`). Las tareas avanzan por los siguientes estados:
+`Todo ➔ In Progress ➔ In Review ➔ Done`
+
+### Normas para Gestionar Tareas en la Terminal:
+Ejecuta estos comandos desde la raíz del proyecto (`c:\Proyectos\WebPersonal`):
+
+1. **Antes de empezar una tarea**, muévela a "In Progress":
+   ```bash
+   node move-task.js <issue_number> in-progress
+   ```
+2. **Si el desarrollo requiere revisión**, muévela a "In Review":
+   ```bash
+   node move-task.js <issue_number> review
+   ```
+3. **Al completar y probar la tarea**, ciérrala y muévela a "Done":
+   ```bash
+   node move-task.js <issue_number> done
+   ```
+
+---
+
+## 🚀 Guía de Inicio Rápido en 5 Pasos
+
+### 1. Requisitos Previos
+Asegúrate de tener instalado:
+* **Node.js 18+** (`node --version`)
+* **npm** o **yarn**
+* **Git**
+
+### 2. Configura las Variables de Entorno
+Crea un archivo `.env` en la raíz del proyecto (`c:\Proyectos\WebPersonal`) con tu token de acceso personal de GitHub (requerido por el script de control de tareas):
+```env
+GITHUB_TOKEN=tu_token_de_github_aqui
 ```
 
-### 2. Sigue los 5 pasos de INICIO_RAPIDO.md
-```
-c:\Proyectos\WebPersonal\docs\INICIO_RAPIDO.md
-```
+### 3. Selecciona tu Tarea
+Abre **[MIGRATION_COMMANDS.md](file:///c:/Proyectos/WebPersonal/docs/MIGRATION_COMMANDS.md)** para ver el estado de la migración y el número del issue de la siguiente tarea pendiente.
 
-### 3. Comienza TASK-001-1
+### 4. Empieza a Desarrollar
+Mueve la tarea a "In Progress" y arranca el entorno de desarrollo:
 ```bash
-npm create vite@latest . -- --template react-ts
+# 1. Mueve el issue a In Progress
+node move-task.js <issue_number> in-progress
+
+# 2. Entra al directorio del portfolio react
+cd apps/portfolio-react
+
+# 3. Levanta el servidor de desarrollo local
+npm run dev
 ```
+Abre [http://localhost:5173/](http://localhost:5173/) en tu navegador.
 
-### 4. Sigue DEVELOPMENT.md para setup
-```
-c:\Proyectos\WebPersonal\docs\DEVELOPMENT.md
-```
-
-### 5. ¡Codea! 🎉
-
----
-
-## ✨ ¿Qué Hace Todo Esto por Ti?
-
-### ✅ Eliminó Incertidumbre
-- ✓ Sé exactamente qué construir (13 US)
-- ✓ Sé cómo construirlo (73 tareas)
-- ✓ Sé cuánto tiempo toma (~32 horas)
-
-### ✅ Acelera Desarrollo
-- ✓ Estructura clara (DDD)
-- ✓ Componentes base listos (TASK-002)
-- ✓ Convenciones documentadas (DEVELOPMENT.md)
-
-### ✅ Garantiza Calidad
-- ✓ TypeScript 100% tipado
-- ✓ >70% test coverage (TASK-011)
-- ✓ ESLint + Prettier automático
-- ✓ Arquitectura escalable
-
-### ✅ Prepara el Futuro
-- ✓ Interfaces para APIs (TASK-012)
-- ✓ Structure para nuevas features
-- ✓ GitHub + CI/CD listo (TASK-013)
-
----
-
-## 📊 By the Numbers
-
-```
-📚 Documentación        10 archivos    ~40 páginas
-🎯 User Stories         13 historias   150+ criterios
-📝 Tareas              73 tasks        Estimadas + checklists
-⏱️  Esfuerzo total     ~32 horas      6 fases
-📦 Stack               React + TypeScript + Vite + Tailwind
-🧪 Testing            Vitest + React Testing Library
-🚀 Deploy             GitHub Actions → Vercel/Netlify
-🎨 Componentes        15+ nuevos      (reutilizables)
-```
-
----
-
-## 🎓 Cómo Usar la Documentación
-
-### Mientras Planificas
-```
-1. Leer RESUMEN_EJECUTIVO.md     (entender el todo)
-2. Revisar USER_STORIES.md        (qué construir)
-3. Revisar TASKS.md               (en qué orden)
-```
-
-### Mientras Codificas
-```
-1. Referir DEVELOPMENT.md         (convenciones)
-2. Referir MODULARIZATION.md      (arquitectura)
-3. Seguir checklist en TASKS.md   (progreso)
-4. Actualizar GitHub Project      (tracking)
-```
-
-### Si Estás Perdido
-```
-1. Consultar INDEX.md             (navegación)
-2. Consultar BIRDS_EYE_VIEW.md    (visión global)
-3. Preguntar (la doc explica todo)
-```
-
----
-
-## 🔄 Flujo Recomendado
-
-### Primer Día: Setup (1-2 horas)
-```
-□ Leer INICIO_RAPIDO.md
-□ Crear GitHub repo (GITHUB_SETUP.md)
-□ Instalar dependencias
-□ Crear rama feature/us-001
-```
-
-### Semana 1: Foundation (7-10 horas)
-```
-□ Ejecutar TASK-001-1 a 001-7 (Setup)
-□ Ejecutar TASK-002-1 a 002-7 (Componentes base)
-□ Pushear cambios regularmente
-□ Crear PR en GitHub
-```
-
-### Semana 2-3: Core UI (7-10 horas)
-```
-□ Ejecutar TASK-003 (Hero)
-□ Ejecutar TASK-004 (Proyectos)
-□ Ejecutar TASK-009 (NavBar)
-```
-
-### Semana 4+: Resto (15 horas)
-```
-□ Contenido (TASK-005, 006, 007)
-□ Detalles (TASK-008, 010)
-□ Testing (TASK-011, 012)
-□ Deploy (TASK-013)
-```
-
----
-
-## 📈 Progreso que Esperamos
-
-```
-SEMANA          HORAS    TAREAS    %        META
-─────────────────────────────────────────────────────
-Semana 1        2.5h     7/73      9%       Setup ✅
-Semana 2-3      7.5h     22/73     39%      Core UI ✅
-Semana 4        6h       32/73     63%      Contenido ✅
-Semana 4        3.5h     39/73     75%      Detalles ✅
-Semana 5        4.5h     49/73     90%      Testing ✅
-Semana 6        2h       73/73     100%     Deploy 🎉
-```
-
----
-
-## 🎯 Checklist para Empezar YA
-
-- [ ] Tengo Node.js 18+ (`node --version`)
-- [ ] Tengo npm (`npm --version`)
-- [ ] Tengo Git (`git --version`)
-- [ ] Tengo GitHub account
-- [ ] Leí INICIO_RAPIDO.md (5 min)
-- [ ] Leí RESUMEN_EJECUTIVO.md (10 min)
-- [ ] Entiendo las 13 US
-- [ ] Entiendo las 6 fases
-- [ ] Tengo GitHub repo creado
-- [ ] Estoy listo para TASK-001-1 ✅
-
----
-
-## 🆘 Si Tienes Dudas
-
-**"¿Por dónde empiezo?"**
-→ docs/INICIO_RAPIDO.md
-
-**"¿Cómo configuro todo?"**
-→ docs/DEVELOPMENT.md
-
-**"¿Cuál es la arquitectura?"**
-→ docs/MODULARIZATION.md
-
-**"¿Qué tareas hay?"**
-→ docs/TASKS.md
-
-**"¿Cuál es el plan general?"**
-→ docs/RESUMEN_EJECUTIVO.md
-
-**"¿Necesito GitHub?"**
-→ docs/GITHUB_SETUP.md
-
-**"¿Cómo veo todo en general?"**
-→ docs/BIRDS_EYE_VIEW.md
-
----
-
-## 💪 Estás 100% Preparado
-
-Hemos entregado:
-
-✅ **Plan claro** - Sabes exactamente qué construir  
-✅ **Arquitectura sólida** - DDD, modular, escalable  
-✅ **Documentación completa** - Responde todas las preguntas  
-✅ **Tareas desglosadas** - 73 pasos manejables  
-✅ **Setup remoto** - GitHub listo para colaborar  
-✅ **Timeline realista** - 6-8 semanas de trabajo  
-✅ **Calidad garantizada** - Testing + CI/CD desde el inicio  
-
----
-
-## 🎉 Conclusión
-
-### Lo que conseguiste hoy:
-
-1. **Plan Profesional** para transformar tu portfolio
-2. **13 Historias de Usuario** bien definidas
-3. **73 Tareas** desglosadas con estimaciones
-4. **Arquitectura DDD** moderna y escalable
-5. **Stack React + TypeScript** profesional
-6. **Testing desde el inicio** (>70% coverage)
-7. **GitHub + CI/CD** configurado
-8. **Documentación nivel producción** (10 archivos)
-
-### Lo que hacemos próximamente:
-
-1. Ejecutar npm create vite (TASK-001-1)
-2. Instalar dependencias
-3. Crear estructura DDD
-4. Empezar componentes base
-5. Build sección por sección
-6. Integrar testing
-7. Deploy automático
-
----
-
-## 📞 Recursos
-
-| Recurso | Link |
-|---------|------|
-| 🎬 Comienza Aquí | docs/INICIO_RAPIDO.md |
-| 📖 Documentación | docs/INDEX.md |
-| 🚀 Visión General | docs/RESUMEN_EJECUTIVO.md |
-| 💻 Setup Dev | docs/DEVELOPMENT.md |
-| 🏗️ Arquitectura | docs/MODULARIZATION.md |
-| 🎯 User Stories | docs/USER_STORIES.md |
-| 📝 Tareas | docs/TASKS.md |
-| 🐙 GitHub | docs/GITHUB_SETUP.md |
-| 👁️ Vista General | docs/BIRDS_EYE_VIEW.md |
-
----
-
-## ✨ Siguiente Paso: Hoy Mismo
-
+### 5. Verifica y Entrega tu Código
+Antes de marcar tu tarea como terminada, ejecuta las validaciones y tests:
 ```bash
-# 1. Abre el proyecto en VS Code
-cd c:\Proyectos\WebPersonal
+# Formatea y comprueba errores de TypeScript/Linter
+npm run lint
+npm run build
 
-# 2. Abre documentación
-code docs/INICIO_RAPIDO.md
+# Ejecuta los tests unitarios
+npm run test
 
-# 3. Sigue los 5 pasos
-# (toma 30 minutos)
-
-# 4. Comienza TASK-001-1
-npm create vite@latest . -- --template react-ts
+# Vuelve a la raíz y cierra la tarea en GitHub
+cd ../..
+node move-task.js <issue_number> done
 ```
-
----
-
-## 🎊 ¡ESTÁS LISTO PARA EMPEZAR!
-
-Tu portfolio v2.0 está listo para ser construido.
-
-**Vamos a hacerlo profesional.** 🚀
-
----
-
-**Última actualización:** Mayo 2026  
-**Versión del Plan:** 2.0  
-**Estado:** ✅ Listo para desarrollo
-
+¡Haz push de tu rama y crea un Pull Request hacia `main`! 🚀
