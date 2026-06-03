@@ -1,3 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Geist', sans-serif;
+    background-color: #0b1326;
+    color: #dae2fd;
+    overflow-x: hidden;
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #060e20;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4cd7f6;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* ── Cursor blink ── */
+  .cursor-blink {
+    border-right: 2px solid #94de2d;
+    animation: blink 1s step-end infinite;
+    padding-left: 2px;
+  }
+
+  @keyframes blink {
+    50% {
+      border-color: transparent;
+    }
+  }
+
+  /* ── Glows ── */
+  .glow-cyan {
+    box-shadow: 0 0 24px rgba(76, 215, 246, 0.18);
+  }
+
+  .glow-lime {
+    box-shadow: 0 0 24px rgba(148, 222, 45, 0.18);
+  }
+
+  .glow-btn {
+    box-shadow: 0 0 16px rgba(6, 182, 212, 0.35);
+  }
+
+  /* ── Gradient text & button ── */
+  .grad-text {
+    background: linear-gradient(135deg, #4cd7f6 0%, #c0c1ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .grad-btn {
+    background: linear-gradient(135deg, #06b6d4, #9a9dff);
+  }
+
+  /* ── Scanline bg ── */
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(76, 215, 246, 0.015) 2px,
+      rgba(76, 215, 246, 0.015) 4px
+    );
+  }
+
+  /* ── Hero grid decoration ── */
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(76, 215, 246, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(76, 215, 246, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── Terminal dot ── */
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  /* ── Skill badge ── */
+  .skill-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+}
