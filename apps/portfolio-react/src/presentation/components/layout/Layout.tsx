@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Header from './Header'
 import MobileMenu from './MobileMenu'
 import Footer from './Footer'
@@ -8,12 +7,10 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
   return (
     <div className="min-h-screen bg-background text-on-surface scanlines">
-      <Header onMenuOpen={() => setIsMenuOpen(true)} />
-      <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <Header />
+      <MobileMenu />
 
       <main>{children}</main>
 

@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useAppDispatch } from '@/store/hooks'
+import { setMobileMenuOpen } from '@/store/slices/uiSlice'
 
-interface HeaderProps {
-  onMenuOpen: () => void
-}
-
-export const Header: React.FC<HeaderProps> = ({ onMenuOpen }) => {
+export const Header: React.FC = () => {
+  const dispatch = useAppDispatch()
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -73,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuOpen }) => {
           </a>
           <button
             id="menu-btn"
-            onClick={onMenuOpen}
+            onClick={() => dispatch(setMobileMenuOpen(true))}
             className="md:hidden p-2 text-on-surface-variant hover:text-primary transition-colors"
             aria-label="Menu"
           >

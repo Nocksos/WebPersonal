@@ -1,9 +1,10 @@
-interface MobileMenuProps {
-  isOpen: boolean
-  onClose: () => void
-}
+import { useAppSelector, useAppDispatch } from '@/store/hooks'
+import { setMobileMenuOpen } from '@/store/slices/uiSlice'
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
+export const MobileMenu: React.FC = () => {
+  const dispatch = useAppDispatch()
+  const isOpen = useAppSelector((state) => state.ui.isMobileMenuOpen)
+  const onClose = () => dispatch(setMobileMenuOpen(false))
   return (
     <>
       {/* Overlay */}
