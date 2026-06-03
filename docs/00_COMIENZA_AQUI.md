@@ -55,6 +55,10 @@ Para mantener el historial limpio, seguimos **Conventional Commits**:
 * `style:` Cambios puramente estéticos o de formateo sin impacto funcional.
 * `test:` Añadir o modificar tests unitarios.
 
+> [!IMPORTANT]
+> **Trazabilidad y Commits Atómicos:**
+> Cada tarea (`TASK-XXX-Y`) dentro de una Historia de Usuario **debe ser validada y confirmada (committed) en un commit independiente** tras asegurar que pasa todos los linters, formateos y builds. No se deben agrupar múltiples tareas en un solo commit para garantizar una trazabilidad limpia del historial de Git.
+
 ---
 
 ## 📋 Gestión de Tareas (Workflow de GitHub)

@@ -501,6 +501,10 @@ refactor(components): move Button to common
 test(button): add unit tests
 ```
 
+> [!IMPORTANT]
+> **Norma de Commits Atómicos:**
+> Cada tarea individual (`TASK-XXX-Y`) de la Historia de Usuario debe desarrollarse, validarse localmente (`npm run lint`, `npm run build` y tests si aplica) y registrarse en su propio commit independiente para mantener una trazabilidad transparente y limpia en Git. No agrupar múltiples tareas.
+
 ---
 
 ## 🚨 Troubleshooting
