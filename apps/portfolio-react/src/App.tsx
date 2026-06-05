@@ -7,7 +7,7 @@ const About = lazy(() => import('./presentation/components/pages/About'))
 const TechStack = lazy(() => import('./presentation/components/pages/TechStack'))
 const Experience = lazy(() => import('./presentation/components/pages/Experience'))
 const CVDownload = lazy(() => import('./presentation/components/pages/CVDownload'))
-const ContactForm = lazy(() => import('./presentation/components/common/ContactForm'))
+const ContactSection = lazy(() => import('./presentation/components/common/ContactSection'))
 
 const SectionSpinner: React.FC = () => (
   <div
@@ -43,7 +43,7 @@ function App() {
         <TechStack />
         <Experience />
         <CVDownload />
-        <ContactForm />
+        <ContactSection />
       </Suspense>
     </Layout>
   )

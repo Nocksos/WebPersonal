@@ -47,9 +47,9 @@ export const CVDownload: React.FC = () => {
             15+ años de trayectoria en mi CV
           </h2>
           <p className="font-geist text-base text-on-surface-variant mb-6 leading-relaxed">
-            Descarga mi CV completo en PDF o HTML. Contiene detalles completos de experiencia,
-            tecnologías, certificaciones y logros cuantificables en gestión documental, cloud y
-            seguridad.
+            Descarga la **versión pública** de mi CV en PDF o HTML. Por motivos de seguridad y para
+            prevenir spam, esta versión omite información de contacto sensible. Puedes solicitar el
+            CV completo con todos los datos escribiéndome por LinkedIn.
           </p>
 
           <div className="space-y-4 mb-8">
@@ -106,15 +106,15 @@ export const CVDownload: React.FC = () => {
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-3">
-            <div className="relative inline-block" ref={dropdownRef}>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 aria-haspopup="true"
                 aria-expanded={isOpen}
-                className="grad-btn text-on-primary px-5 py-3 font-mono text-sm font-bold rounded-sm flex items-center gap-2 glow-btn hover:brightness-110 focus-visible:ring-2 focus-visible:ring-primary focus:outline-none transition-all"
+                className="w-full sm:w-auto grad-btn text-on-primary px-5 py-3.5 font-mono text-xs font-bold rounded-sm flex items-center justify-center gap-2 glow-btn hover:brightness-110 focus-visible:ring-2 focus-visible:ring-primary focus:outline-none transition-all"
               >
-                DESCARGAR CV
+                DESCARGAR CV PÚBLICO
                 <svg
                   width="12"
                   height="12"
@@ -157,7 +157,21 @@ export const CVDownload: React.FC = () => {
                 </div>
               )}
             </div>
+
+            <a
+              href="https://www.linkedin.com/in/alvarohernandezgil/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-surface-container hover:bg-primary/10 border border-primary/30 hover:border-primary text-primary px-5 py-3.5 font-mono text-xs font-bold rounded-sm flex items-center justify-center gap-2 transition-all focus-visible:ring-2 focus-visible:ring-primary focus:outline-none"
+            >
+              SOLICITAR CV COMPLETO VIA LINKEDIN →
+            </a>
           </div>
+
+          <p className="mt-4 font-mono text-[9px] text-outline flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+            VERSIÓN PÚBLICA OFUSCADA POR SEGURIDAD. DATOS SENSIBLES OMITIDOS.
+          </p>
         </div>
 
         {/* Right Column - Summary & Contact Info */}
