@@ -69,6 +69,11 @@ jobs:
           echo "storage=$STORAGE_ACCOUNT_NAME" >> $GITHUB_OUTPUT
           echo "container=$CONTAINER_NAME" >> $GITHUB_OUTPUT
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.0"
+
       - name: Terraform Init
         run: |
           terraform init \
