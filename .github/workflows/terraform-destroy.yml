@@ -1,0 +1,79 @@
+name: "Terraform Destroy"
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Escribe "destroy" para confirmar la eliminación de la infraestructura'
+        required: true
+        default: 'cancel'
+
+permissions:
+  contents: read
+
+env:
+  TF_VAR_location: ${{ vars.LOCATION }}
+  TF_VAR_resource_group_name: ${{ vars.RESOURCE_GROUP_NAME }}
+  TF_VAR_swa_name: ${{ vars.SWA_NAME }}
+  TF_VAR_swa_sku: ${{ vars.SWA_SKU }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+jobs:
+  terraform-destroy:
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        working-directory: terraform
+
+    steps:
+      - name: Confirm Destruction
+        if: ${{ github.event.inputs.confirm != 'destroy' }}
+        run: |
+          echo "Confirmación inválida. Para destruir debes escribir 'destroy'."
+          exit 1
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.0"
+
+      - name: Prepare Backend for Destruction
+        id: setup_backend
+        shell: bash
+        run: |
+          RG_NAME="tfstate-rg"
+          STORAGE_ACCOUNT_NAME="tfstateaccount"
+          CONTAINER_NAME="tfstate"
+
+          az group create --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
+
+          echo "rg=$RG_NAME" >> $GITHUB_OUTPUT
+          echo "storage=$STORAGE_ACCOUNT_NAME" >> $GITHUB_OUTPUT
+          echo "container=$CONTAINER_NAME" >> $GITHUB_OUTPUT
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="resource_group=${{ steps.setup_backend.outputs.rg }}" \
+            -backend-config="storage_account=${{ steps.setup_backend.outputs.storage }}" \
+            -backend-config="container=${{ steps.setup_backend.outputs.container }}" \
+            -backend-config="key=terraform.tfstate"
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve -input=false
+

@@ -1,0 +1,88 @@
+name: "Terraform Apply"
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  TF_VAR_location: ${{ vars.LOCATION }}
+  TF_VAR_resource_group_name: ${{ vars.RESOURCE_GROUP_NAME }}
+  TF_VAR_swa_name: ${{ vars.SWA_NAME }}
+  TF_VAR_swa_sku: ${{ vars.SWA_SKU }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        working-directory: terraform
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.0"
+
+      - name: Create Backend Infrastructure (Idempotent)
+        id: setup_backend
+        shell: bash
+        run: |
+          RG_NAME="tfstate-rg"
+          STORAGE_ACCOUNT_NAME="tfstateaccount"
+          CONTAINER_NAME="tfstate"
+
+          az group create --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
+
+          AVAILABILITY=$(az storage account check-name --name $STORAGE_ACCOUNT_NAME --query nameAvailable -o tsv)
+          if [ "$AVAILABILITY" == "true" ]; then
+            az storage account create \
+              --name $STORAGE_ACCOUNT_NAME \
+              --resource-group $RG_NAME \
+              --location "${{ vars.LOCATION }}" \
+              --sku Standard_LRS
+          fi
+
+          az storage container create \
+            --name $CONTAINER_NAME \
+            --account-name $STORAGE_ACCOUNT_NAME \
+            --auth-mode login > /dev/null 2>&1 || true
+
+          echo "rg=$RG_NAME" >> $GITHUB_OUTPUT
+          echo "storage=$STORAGE_ACCOUNT_NAME" >> $GITHUB_OUTPUT
+          echo "container=$CONTAINER_NAME" >> $GITHUB_OUTPUT
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="resource_group=${{ steps.setup_backend.outputs.rg }}" \
+            -backend-config="storage_account=${{ steps.setup_backend.outputs.storage }}" \
+            -backend-config="container=${{ steps.setup_backend.outputs.container }}" \
+            -backend-config="key=terraform.tfstate"
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
+
