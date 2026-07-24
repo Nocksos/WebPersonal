@@ -6,5 +6,5 @@ output "api_key" {
 
 output "static_web_app_url" {
   description = "Default hostname of the Azure Static Web App"
-  value       = azurerm_static_web_app.main_swa.default_hostname
+  value       = azurerm_static_web_app.main_swa.default_host_name
 }

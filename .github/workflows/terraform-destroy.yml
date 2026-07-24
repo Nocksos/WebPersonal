@@ -16,10 +16,7 @@ env:
   TF_VAR_resource_group_name: ${{ vars.RESOURCE_GROUP_NAME }}
   TF_VAR_swa_name: ${{ vars.SWA_NAME }}
   TF_VAR_swa_sku: ${{ vars.SWA_SKU }}
-  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"
 
 jobs:
   terraform-destroy:
@@ -53,11 +50,8 @@ jobs:
         id: setup_backend
         shell: bash
         run: |
-          az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-
           RG_NAME="tfstate-rg"
-          CLEAN_SUB_ID=$(echo "${{ secrets.AZURE_SUBSCRIPTION_ID }}" | tr -d '-')
-          STORAGE_ACCOUNT_NAME="tfstate${CLEAN_SUB_ID:0:12}"
+          STORAGE_ACCOUNT_NAME="tfstatewebpersonal2026"
           CONTAINER_NAME="tfstate"
 
           az group create --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
@@ -67,13 +61,23 @@ jobs:
           echo "container=$CONTAINER_NAME" >> $GITHUB_OUTPUT
 
       - name: Terraform Init
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: |
           terraform init \
-            -backend-config="resource_group=${{ steps.setup_backend.outputs.rg }}" \
-            -backend-config="storage_account=${{ steps.setup_backend.outputs.storage }}" \
-            -backend-config="container=${{ steps.setup_backend.outputs.container }}" \
+            -backend-config="resource_group_name=${{ steps.setup_backend.outputs.rg }}" \
+            -backend-config="storage_account_name=${{ steps.setup_backend.outputs.storage }}" \
+            -backend-config="container_name=${{ steps.setup_backend.outputs.container }}" \
             -backend-config="key=terraform.tfstate"
 
       - name: Terraform Destroy
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform destroy -auto-approve -input=false
 

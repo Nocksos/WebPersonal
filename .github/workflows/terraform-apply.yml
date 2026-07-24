@@ -3,6 +3,7 @@ name: "Terraform Apply"
 on:
   push:
     branches:
+      - master
       - main
   workflow_dispatch:
 
@@ -14,10 +15,7 @@ env:
   TF_VAR_resource_group_name: ${{ vars.RESOURCE_GROUP_NAME }}
   TF_VAR_swa_name: ${{ vars.SWA_NAME }}
   TF_VAR_swa_sku: ${{ vars.SWA_SKU }}
-  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"
 
 jobs:
   terraform:
@@ -36,53 +34,73 @@ jobs:
         with:
           creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_PASSWORD }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.7.0"
-
       - name: Create Backend Infrastructure (Idempotent)
         id: setup_backend
         shell: bash
         run: |
-          az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+          echo "=== Registering Resource Providers ==="
+          az provider register --namespace Microsoft.Storage > /dev/null 2>&1 || true
+          az provider register --namespace Microsoft.Web > /dev/null 2>&1 || true
+
+          LOCATION_VAL="${{ vars.LOCATION }}"
+          if [ -z "$LOCATION_VAL" ]; then
+            LOCATION_VAL="westeurope"
+          fi
 
           RG_NAME="tfstate-rg"
-          CLEAN_SUB_ID=$(echo "${{ secrets.AZURE_SUBSCRIPTION_ID }}" | tr -d '-')
-          STORAGE_ACCOUNT_NAME="tfstate${CLEAN_SUB_ID:0:12}"
+          STORAGE_ACCOUNT_NAME="tfstatewebpersonal2026"
           CONTAINER_NAME="tfstate"
 
-          az group create --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
+          az group create --name $RG_NAME --location "$LOCATION_VAL"
 
-          AVAILABILITY=$(az storage account check-name --name $STORAGE_ACCOUNT_NAME --query nameAvailable -o tsv)
-          if [ "$AVAILABILITY" == "true" ]; then
-            az storage account create \
-              --name $STORAGE_ACCOUNT_NAME \
-              --resource-group $RG_NAME \
-              --location "${{ vars.LOCATION }}" \
-              --sku Standard_LRS
-          fi
+          az storage account create \
+            --name $STORAGE_ACCOUNT_NAME \
+            --resource-group $RG_NAME \
+            --location "$LOCATION_VAL" \
+            --sku Standard_LRS
+
+          ACCOUNT_KEY=$(az storage account keys list --resource-group $RG_NAME --account-name $STORAGE_ACCOUNT_NAME --query "[0].value" -o tsv)
 
           az storage container create \
             --name $CONTAINER_NAME \
             --account-name $STORAGE_ACCOUNT_NAME \
-            --auth-mode key > /dev/null
+            --account-key "$ACCOUNT_KEY"
 
           echo "rg=$RG_NAME" >> $GITHUB_OUTPUT
           echo "storage=$STORAGE_ACCOUNT_NAME" >> $GITHUB_OUTPUT
           echo "container=$CONTAINER_NAME" >> $GITHUB_OUTPUT
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.0"
+
       - name: Terraform Init
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: |
           terraform init \
-            -backend-config="resource_group=${{ steps.setup_backend.outputs.rg }}" \
-            -backend-config="storage_account=${{ steps.setup_backend.outputs.storage }}" \
-            -backend-config="container=${{ steps.setup_backend.outputs.container }}" \
+            -backend-config="resource_group_name=${{ steps.setup_backend.outputs.rg }}" \
+            -backend-config="storage_account_name=${{ steps.setup_backend.outputs.storage }}" \
+            -backend-config="container_name=${{ steps.setup_backend.outputs.container }}" \
             -backend-config="key=terraform.tfstate"
 
       - name: Terraform Plan
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform plan -input=false
 
       - name: Terraform Apply
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform apply -auto-approve -input=false
 

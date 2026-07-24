@@ -9,12 +9,16 @@ lerna-debug.log*
 
 # Dependency directories
 node_modules/
+**/node_modules/
 jspm_packages/
 
 # Build outputs
 dist/
+**/dist/
 build/
+**/build/
 out/
+**/out/
 
 # Environment files
 .env
