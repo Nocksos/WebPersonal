@@ -41,18 +41,15 @@ jobs:
         id: setup_backend
         shell: bash
         run: |
-          SUB_ID=$(az account show --query id -o tsv)
-          CLEAN_SUB_ID=$(echo "$SUB_ID" | tr -d '-')
-          STORAGE_ACCOUNT_NAME="tfstate${CLEAN_SUB_ID:0:12}"
           RG_NAME="tfstate-rg"
+          STORAGE_ACCOUNT_NAME="tfstatewebpersonal2026"
           CONTAINER_NAME="tfstate"
 
-          az group create --subscription "$SUB_ID" --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
+          az group create --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
 
           AVAILABILITY=$(az storage account check-name --name $STORAGE_ACCOUNT_NAME --query nameAvailable -o tsv)
           if [ "$AVAILABILITY" == "true" ]; then
             az storage account create \
-              --subscription "$SUB_ID" \
               --name $STORAGE_ACCOUNT_NAME \
               --resource-group $RG_NAME \
               --location "${{ vars.LOCATION }}" \

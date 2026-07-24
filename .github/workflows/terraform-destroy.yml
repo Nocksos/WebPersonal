@@ -53,10 +53,8 @@ jobs:
         id: setup_backend
         shell: bash
         run: |
-          SUB_ID=$(az account show --query id -o tsv)
-          CLEAN_SUB_ID=$(echo "$SUB_ID" | tr -d '-')
-          STORAGE_ACCOUNT_NAME="tfstate${CLEAN_SUB_ID:0:12}"
           RG_NAME="tfstate-rg"
+          STORAGE_ACCOUNT_NAME="tfstatewebpersonal2026"
           CONTAINER_NAME="tfstate"
 
           az group create --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
