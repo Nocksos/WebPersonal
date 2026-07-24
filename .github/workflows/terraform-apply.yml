@@ -51,19 +51,18 @@ jobs:
 
           az group create --name $RG_NAME --location "$LOCATION_VAL"
 
-          AVAILABILITY=$(az storage account check-name --name $STORAGE_ACCOUNT_NAME --query nameAvailable -o tsv)
-          if [ "$AVAILABILITY" == "true" ]; then
-            az storage account create \
-              --name $STORAGE_ACCOUNT_NAME \
-              --resource-group $RG_NAME \
-              --location "$LOCATION_VAL" \
-              --sku Standard_LRS
-          fi
+          az storage account create \
+            --name $STORAGE_ACCOUNT_NAME \
+            --resource-group $RG_NAME \
+            --location "$LOCATION_VAL" \
+            --sku Standard_LRS
+
+          ACCOUNT_KEY=$(az storage account keys list --resource-group $RG_NAME --account-name $STORAGE_ACCOUNT_NAME --query "[0].value" -o tsv)
 
           az storage container create \
             --name $CONTAINER_NAME \
             --account-name $STORAGE_ACCOUNT_NAME \
-            --auth-mode key > /dev/null
+            --account-key "$ACCOUNT_KEY"
 
           echo "rg=$RG_NAME" >> $GITHUB_OUTPUT
           echo "storage=$STORAGE_ACCOUNT_NAME" >> $GITHUB_OUTPUT
