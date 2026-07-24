@@ -37,8 +37,9 @@ jobs:
         id: setup_backend
         shell: bash
         run: |
-          echo "=== Checking Active CLI Account ==="
-          az account show --output json
+          echo "=== Registering Resource Providers ==="
+          az provider register --namespace Microsoft.Storage > /dev/null 2>&1 || true
+          az provider register --namespace Microsoft.Web > /dev/null 2>&1 || true
 
           LOCATION_VAL="${{ vars.LOCATION }}"
           if [ -z "$LOCATION_VAL" ]; then
