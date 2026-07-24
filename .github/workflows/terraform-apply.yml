@@ -41,18 +41,26 @@ jobs:
         id: setup_backend
         shell: bash
         run: |
+          echo "=== Checking Active CLI Account ==="
+          az account show --output json
+
+          LOCATION_VAL="${{ vars.LOCATION }}"
+          if [ -z "$LOCATION_VAL" ]; then
+            LOCATION_VAL="westeurope"
+          fi
+
           RG_NAME="tfstate-rg"
           STORAGE_ACCOUNT_NAME="tfstatewebpersonal2026"
           CONTAINER_NAME="tfstate"
 
-          az group create --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
+          az group create --name $RG_NAME --location "$LOCATION_VAL" --output json > /dev/null
 
           AVAILABILITY=$(az storage account check-name --name $STORAGE_ACCOUNT_NAME --query nameAvailable -o tsv)
           if [ "$AVAILABILITY" == "true" ]; then
             az storage account create \
               --name $STORAGE_ACCOUNT_NAME \
               --resource-group $RG_NAME \
-              --location "${{ vars.LOCATION }}" \
+              --location "$LOCATION_VAL" \
               --sku Standard_LRS
           fi
 
