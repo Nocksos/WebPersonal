@@ -49,7 +49,7 @@ jobs:
           STORAGE_ACCOUNT_NAME="tfstatewebpersonal2026"
           CONTAINER_NAME="tfstate"
 
-          az group create --name $RG_NAME --location "$LOCATION_VAL" --output json > /dev/null
+          az group create --name $RG_NAME --location "$LOCATION_VAL"
 
           AVAILABILITY=$(az storage account check-name --name $STORAGE_ACCOUNT_NAME --query nameAvailable -o tsv)
           if [ "$AVAILABILITY" == "true" ]; then
