@@ -45,8 +45,11 @@ jobs:
         id: setup_backend
         shell: bash
         run: |
+          az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+
           RG_NAME="tfstate-rg"
-          STORAGE_ACCOUNT_NAME="tfstateaccount"
+          CLEAN_SUB_ID=$(echo "${{ secrets.AZURE_SUBSCRIPTION_ID }}" | tr -d '-')
+          STORAGE_ACCOUNT_NAME="tfstate${CLEAN_SUB_ID:0:12}"
           CONTAINER_NAME="tfstate"
 
           az group create --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
@@ -63,7 +66,7 @@ jobs:
           az storage container create \
             --name $CONTAINER_NAME \
             --account-name $STORAGE_ACCOUNT_NAME \
-            --auth-mode login > /dev/null 2>&1 || true
+            --auth-mode key > /dev/null
 
           echo "rg=$RG_NAME" >> $GITHUB_OUTPUT
           echo "storage=$STORAGE_ACCOUNT_NAME" >> $GITHUB_OUTPUT
