@@ -40,6 +40,7 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ env.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ github.token }}
+          action: "upload"
           app_location: "apps/portfolio-react"
           output_location: "dist"
           skip_app_build: true
