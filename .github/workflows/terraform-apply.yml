@@ -36,19 +36,6 @@ jobs:
         uses: azure/login@v2
         with:
           creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_PASSWORD }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
-          allow-no-subscriptions: true
-
-      - name: Debug Azure Subscriptions
-        run: |
-          echo "=== Attempting Explicit CLI Login ==="
-          az login --service-principal -u "${{ secrets.AZURE_CLIENT_ID }}" -p "${{ secrets.AZURE_CLIENT_PASSWORD }}" --tenant "${{ secrets.AZURE_TENANT_ID }}"
-          echo "=== Visible Azure Subscriptions ==="
-          az account list --all --output table
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.7.0"
 
       - name: Create Backend Infrastructure (Idempotent)
         id: setup_backend
@@ -60,11 +47,12 @@ jobs:
           RG_NAME="tfstate-rg"
           CONTAINER_NAME="tfstate"
 
-          az group create --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
+          az group create --subscription "$SUB_ID" --name $RG_NAME --location "${{ vars.LOCATION }}" --query id -o tsv > /dev/null
 
           AVAILABILITY=$(az storage account check-name --name $STORAGE_ACCOUNT_NAME --query nameAvailable -o tsv)
           if [ "$AVAILABILITY" == "true" ]; then
             az storage account create \
+              --subscription "$SUB_ID" \
               --name $STORAGE_ACCOUNT_NAME \
               --resource-group $RG_NAME \
               --location "${{ vars.LOCATION }}" \
